@@ -1,0 +1,165 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "AmazingChief server",
+    "version": "1.0.0",
+    "title": "AmazingChief APIs",
+    "termsOfService": "http://swagger.io/terms/",
+    "contact": {
+      "email": "apiteam@swagger.io"
+    },
+    "license": {
+      "name": "Apache 2.0",
+      "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+    }
+  },
+  "tags": [
+    {
+      "name": "search",
+      "description": "Operations searching recipes",
+      "externalDocs": {
+        "description": "Find out more about our store",
+        "url": "http://swagger.io"
+      }
+    }
+  ],
+  "paths": {
+    "/search_recipes": {
+      "post": {
+        "tags": [
+          "search"
+        ],
+        "summary": "search recipes.",
+        "description": "search recipes given ingredients.",
+        "operationId": "loginnnnnnnnnnnnnnnnn",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "send ingredients",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Ingredients"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Recipes are found",
+            "schema": {
+              "$ref": "#/definitions/Search_Response"
+            }
+          },
+          "400": {
+            "description": "Bad request"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Ingredients": {
+      "type": "object",
+      "properties": {
+        "ingredients": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "Search_Response": {
+      "type": "object",
+      "properties": {
+        "recipes": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "recipe_name": {
+                "type": "string"
+              },
+              "ingredients": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "name": {
+                      "type": "string"
+                    },
+                    "quantity": {
+                      "type": "string"
+                    },
+                    "metric": {
+                      "type": "string"
+                    },
+                    "note": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "image": {
+          "type": "object",
+          "properties": {
+            "type": {
+              "type": "string"
+            },
+            "source": {
+              "type": "string"
+            }
+          }
+        },
+        "direction": {
+          "type": "object",
+          "properties": {
+            "1": {
+              "type": "string"
+            },
+            "2": {
+              "type": "string"
+            }
+          }
+        },
+        "cruisine_type": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "meal_type": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "dietary": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "cook_time": {
+          "type": "integer"
+        }
+      }
+    }
+  },
+  "externalDocs": {
+    "description": "Find out more about Swagger",
+    "url": "http://swagger.io"
+  },
+  "host": "virtserver.swaggerhub.com",
+  "basePath": "/ntrhieu89/UserProfile/1.0.0",
+  "schemes": [
+    "https",
+    "http"
+  ]
+}
