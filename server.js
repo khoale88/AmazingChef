@@ -13,7 +13,7 @@ var app = express();
 app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs');
 
-app.use(express.static("styles"));
+app.use(express.static('public'));
 
 // Use application-level middleware for common functionality, including
 // logging, parsing, and session handling.
