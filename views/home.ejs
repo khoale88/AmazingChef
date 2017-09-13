@@ -3,6 +3,7 @@
 <head>
 
 	<!-- your webpage info goes here -->
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 
 	<title>My First Website</title>
 
@@ -10,30 +11,93 @@
 	<meta name="description" content="" />
 
 	<!-- you should always add your stylesheet (css) in the head tag so that it starts loading before the page html is being displayed -->
-	<link rel="stylesheet" href="style.css" type="text/css" />
+	<!--<link rel="stylesheet" href="style.css" type="text/css" />
+
+	<style type="text/css">
+		div{
+			padding:8px;
+		}
+	</style>-->
+
+
+	<script>
+
+
+
+
+        $(document).ready(function(){
+
+            var counter = 2;
+
+            $("#addButton").click(function () {
+
+                if(counter>10){
+                    alert("Only 10 textboxes allow");
+                    return false;
+                }
+
+                var newTextBoxDiv = $(document.createElement('div'))
+                    .attr("id", 'TextBoxDiv' + counter);
+
+                newTextBoxDiv.after().html('<label>Ingredient #'+ counter + ' : </label>' +
+                    '<input type="text" name="textbox' + counter +
+                    '" id="textbox' + counter + '" value="" >');
+
+                newTextBoxDiv.appendTo("#TextBoxesGroup");
+
+
+                counter++;
+            });
+
+            $("#removeButton").click(function () {
+                if(counter==1){
+                    alert("No more textbox to remove");
+                    return false;
+                }
+
+                counter--;
+
+                $("#TextBoxDiv" + counter).remove();
+
+            });
+
+            $("#getButtonValue").click(function () {
+
+                var msg = '';
+                for(i=1; i<counter; i++){
+                    msg += "\n Textbox #" + i + " : " + $('#textbox' + i).val();
+                }
+                //search();
+                alert(msg);
+
+            });
+        });
+
+
+	</script>
+
 
 </head>
-<body>
+<body ng-app="home" ng-controller="home">
 
-<!-- webpage content goes here in the body -->
 
 <div id="page">
 	<div id="logo">
 		<h1><a href="/" id="logoLink">WELCOME TO AMAZING CHEF</a></h1>
-	</div>
-
-
-	<div>
-
-		Please enter the first ingredient:<br><input id = "first" type="text" name="First Ingredient" >
-		<br>
-		Please enter the second ingredient:<br><input id = "second" type="text" name="Second Ingredient">
-
+		<img src="https://thumbs.dreamstime.com/z/amazing-cook-woman-chef-holding-tray-isolated-white-37194931.jpg" style="margin-right:90%" width="300px" height 228px>
 
 	</div>
 
+		<div id='TextBoxesGroup'>
+			<div id="TextBoxDiv1">
+				<label>Ingredient #1 : </label><input type='textbox' id='textbox1' name = 'ingredient1' >
+			</div>
+		</div>
 
-	<button onclick="myFunction()">Click me</button>
+	<input type='button' value='Add Ingredient' id='addButton'>
+	<input type='button' value='Remove Ingredient' id='removeButton'>
+	<input type='button' value='Search Recipe' id='getButtonValue'>
+
 
 	<p id="demo"></p>
 
@@ -41,19 +105,9 @@
 
 </div>
 
-<script>
-    var recipes = [
-        { First_Ingredient :'Egg',Second_Ingredient:'Salt', Recipe: 'First beat eggs, water, salt and pepper in small bowl until blended. Then heat butter in 7 to 10-inch non-stick omelette pan or skillet over medium-high heat until hot. TILT pan to coat bottom. POUR IN egg mixture. Mixture should set immediately at edges and ' +
-		' then gently push cooked portions from edges toward the centre with inverted turner so that uncooked eggs can reach the hot pan surface. CONTINUE cooking, tilting pan and gently moving cooked portions as needed.1. When top surface of eggs is thickened and no visible liquid egg remains, PLACE filling on one side of the omelette. FOLD omelette in half with turner. With a quick flip of the wrist, turn pan and INVERT or SLIDE omelette onto plate. SERVE immediately.' }
 
-    ];
-
-    var stringifyrecipes = JSON.stringify(recipes);
-
-    function myFunction() {
-        document.getElementById("demo").innerHTML = stringifyrecipes;
-        console.log(recipes[0].recipe);
-    }
-</script>
 </body>
+
+
+
 </html>
