@@ -64,8 +64,14 @@
             $("#Search").click(function () {
 
                 var msg = '';
+                //alert($('#textbox1').val());
+                if(($('#textbox1').val()) == "" || ($('#textbox2').val()) == '')
+                {
+                    alert("Add atleast two ingredients")
+                    return false;
+                }
                 for(i=1; i<counter; i++){
-                    msg += "\n Textbox #" + i + " : " + $('#textbox' + i).val();
+                    msg += "\n " + $('#textbox' + i).val();
                 }
                 //search();
 
