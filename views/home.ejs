@@ -2,7 +2,8 @@
 <html>
 <head>
 
-	<!-- your webpage info goes here -->
+
+	<meta charset="UTF-8">
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 
 	<title>My First Website</title>
@@ -10,14 +11,25 @@
 	<meta name="author" content="your name" />
 	<meta name="description" content="" />
 
-	<!-- you should always add your stylesheet (css) in the head tag so that it starts loading before the page html is being displayed -->
-	<!--<link rel="stylesheet" href="style.css" type="text/css" />
 
-	<style type="text/css">
-		div{
-			padding:8px;
+	<link rel="stylesheet" href="mystyles1.css">
+
+
+	<!--<style>
+		h1 {
+			border: 1px solid black;
+			margin-top: 100px;
+			margin-bottom: 100px;
+			margin-right: 150px;
+			background-color: lightblue;
 		}
+
+		body {
+			background-color:lightcyan;
+		}
+
 	</style>-->
+
 
 
 	<script>
@@ -81,29 +93,29 @@
 <body ng-app="home" ng-controller="home">
 
 
-<div id="page">
-	<div id="logo">
-		<h1><a href="/" id="logoLink">WELCOME TO AMAZING CHEF</a></h1>
-		<img src="https://thumbs.dreamstime.com/z/amazing-cook-woman-chef-holding-tray-isolated-white-37194931.jpg" style="margin-right:90%" width="300px" height 228px>
+	<div id="page">
+		<div id="logo">
+			<h1>WELCOME TO AMAZING CHEF</h1>
+			<img id = "image" src="https://thumbs.dreamstime.com/z/amazing-cook-woman-chef-holding-tray-isolated-white-37194931.jpg" style="margin-right:90%" width="300px" height 228px>
 
-	</div>
-
-		<div id='TextBoxesGroup'>
-			<div id="TextBoxDiv1">
-				<label>Ingredient #1 : </label><input type='textbox' id='textbox1' name = 'ingredient1' >
-			</div>
 		</div>
 
-	<input type='button' value='Add Ingredient' id='addButton'>
-	<input type='button' value='Remove Ingredient' id='removeButton'>
-	<input type='button' value='Search Recipe' id='getButtonValue'>
+			<div id='TextBoxesGroup'>
+				<div id="TextBoxDiv1">
+					<label>Ingredient #1 : </label><input type='textbox' id='textbox1' name = 'ingredient1' >
+				</div>
+			</div>
+
+		<input type='button' value='Add Ingredient' id='addButton'>
+		<input type='button' value='Remove Ingredient' id='removeButton'>
+		<input type='button' value='Search Recipe' id='getButtonValue'>
 
 
-	<p id="demo"></p>
+		<p id="demo"></p>
 
 
 
-</div>
+	</div>
 
 
 </body>

@@ -1,0 +1,11 @@
+h1 {
+    border: 1px solid black;
+    margin-top: 100px;
+    margin-bottom: 100px;
+    margin-right: 150px;
+    background-color: lightblue;
+}
+
+body {
+    background-color:lightyellow;
+}
