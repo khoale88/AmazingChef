@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+	<!-- your webpage info goes here -->
+
+	<title>My First Website</title>
+
+	<meta name="author" content="your name" />
+	<meta name="description" content="" />
+
+	<!-- you should always add your stylesheet (css) in the head tag so that it starts loading before the page html is being displayed -->
+	<link rel="stylesheet" href="style.css" type="text/css" />
+
+</head>
+<body>
+
+<!-- webpage content goes here in the body -->
+
+<div id="page">
+	<div id="logo">
+		<h1><a href="/" id="logoLink">WELCOME TO AMAZING CHEF</a></h1>
+	</div>
+
+
+	<div>
+
+		Please enter the first ingredient:<br><input id = "first" type="text" name="First Ingredient" >
+		<br>
+		Please enter the second ingredient:<br><input id = "second" type="text" name="Second Ingredient">
+
+
+	</div>
+
+
+	<button onclick="myFunction()">Click me</button>
+
+	<p id="demo"></p>
+
+
+
+</div>
+
+<script>
+    var recipes = [
+        { First_Ingredient :'Egg',Second_Ingredient:'Salt', Recipe: 'First beat eggs, water, salt and pepper in small bowl until blended. Then heat butter in 7 to 10-inch non-stick omelette pan or skillet over medium-high heat until hot. TILT pan to coat bottom. POUR IN egg mixture. Mixture should set immediately at edges and ' +
+		' then gently push cooked portions from edges toward the centre with inverted turner so that uncooked eggs can reach the hot pan surface. CONTINUE cooking, tilting pan and gently moving cooked portions as needed.1. When top surface of eggs is thickened and no visible liquid egg remains, PLACE filling on one side of the omelette. FOLD omelette in half with turner. With a quick flip of the wrist, turn pan and INVERT or SLIDE omelette onto plate. SERVE immediately.' }
+
+    ];
+
+    var stringifyrecipes = JSON.stringify(recipes);
+
+    function myFunction() {
+        document.getElementById("demo").innerHTML = stringifyrecipes;
+        console.log(recipes[0].recipe);
+    }
+</script>
+</body>
+</html>
