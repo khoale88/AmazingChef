@@ -2,23 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="bbfa862b-1c1d-4bfe-8c79-10935911e5ee" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/AmazingChef" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/express-4.x-local-example-master.iml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/LICENSE" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/db/index.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/db/recipes.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/styles/mystyles1.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/routes/home.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/routes/index.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/views/omlette.ejs" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/views/potatocurry.ejs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gitignore" afterPath="$PROJECT_DIR$/.gitignore" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/modules.xml" afterPath="$PROJECT_DIR$/.idea/modules.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/views/recipe.ejs" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/package-lock.json" afterPath="$PROJECT_DIR$/package-lock.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/package.json" afterPath="$PROJECT_DIR$/package.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/server.js" afterPath="$PROJECT_DIR$/server.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/views/home.ejs" afterPath="$PROJECT_DIR$/views/home.ejs" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/recipes/omlette.json" afterPath="$PROJECT_DIR$/recipes/omlette.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/recipes/potato_curry.json" afterPath="$PROJECT_DIR$/recipes/potato_curry.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/views/search.ejs" afterPath="$PROJECT_DIR$/views/search.ejs" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -47,8 +35,8 @@
       <file leaf-file-name="server.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/server.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="225">
-              <caret line="15" column="0" lean-forward="false" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
+            <state relative-caret-position="1035">
+              <caret line="69" column="0" lean-forward="false" selection-start-line="69" selection-start-column="0" selection-end-line="69" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -188,12 +176,12 @@
       <workItem from="1505265292088" duration="147000" />
       <workItem from="1505265514523" duration="21165000" />
       <workItem from="1505333364479" duration="3012000" />
-      <workItem from="1505406265697" duration="29000" />
+      <workItem from="1505406265697" duration="230000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="37861000" />
+    <option name="totallyTimeSpent" value="38062000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />
@@ -471,8 +459,8 @@
     <entry file="file://$PROJECT_DIR$/styles/mystyles1.css" />
     <entry file="file://$PROJECT_DIR$/server.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="225">
-          <caret line="15" column="0" lean-forward="false" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
+        <state relative-caret-position="1035">
+          <caret line="69" column="0" lean-forward="false" selection-start-line="69" selection-start-column="0" selection-end-line="69" selection-end-column="0" />
           <folding />
         </state>
       </provider>

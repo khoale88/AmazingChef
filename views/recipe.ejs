@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+
+<body>
+    <%if (recipe){%>
+        <h2>
+            <%=recipe["recipe_name"]%>
+        </h2>
+        <img src="<%=recipe['image']['source']%>" style="width:304px;height:228px;">
+
+
+        <div>
+            <p><b>Ingredients</b></p>
+
+            <table border="1">
+
+                <tr>
+                    <th>Ingredient</th>
+                    <th>Quantity</th>
+                </tr>
+                <%for(var i=0; i<recipe["ingredients"].length; i++){%>
+                    <tr>
+                        <td>
+                            <%=recipe["ingredients"][i]["name"]%>
+                        </td>
+                        <td>
+                            <%=recipe["ingredients"][i]["quantity"] + " " + recipe["ingredients"][i]["metric"]%>
+                        </td>
+                    </tr>
+                    <%}%>
+            </table>
+
+
+            <p><b>Direction</b></p>
+
+            <p>
+
+                <ol>
+                    <%for(var step in recipe["direction"]){%>
+                        <li>
+                            <%=recipe["direction"][step]%>
+                        </li>
+                        <%}%>
+                </ol>
+
+            </p>
+
+
+        </div>
+        <%}%>
+
+</body>
+
+</html>
