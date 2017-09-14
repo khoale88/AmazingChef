@@ -1,34 +1,69 @@
 var express = require('express');
-var app = express();
-var bodyParser = require('body-parser');
-var fs = require('fs');
+var passport = require('passport');
+var Strategy = require('passport-local').Strategy;
+var db = require('./db');
+var routes	= require('./routes');
+var home = require("./routes/home");
 
-app.set("views", __dirname + "/views");
+
+// Create a new Express pplication.
+var app = express();
+
+// Configure view engine to render EJS templates.
+app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs');
 
-// var cookieParser = require('cookie-parser');
+app.use(express.static('public'));
 
-// Create application/x-www-form-urlencoded parser
-var urlencodedParser = bodyParser.urlencoded({ extended: false })
+// Use application-level middleware for common functionality, including
+// logging, parsing, and session handling.
+app.use(require('morgan')('combined'));
+app.use(require('cookie-parser')());
+app.use(require('body-parser').urlencoded({ extended: true }));
+app.use(require('express-session')({ secret: 'keyboard cat', resave: false, saveUninitialized: false }));
 
-// app.use(express.static("views"));
-// app.use(cookieParser());
+// Initialize Passport and restore authentication state, if any, from the
+// session.
+app.use(passport.initialize());
+app.use(passport.session());
 
-app.get("/", function(req, res) {
-    res.render("home.ejs");
-})
-app.get('/search_recipes', urlencodedParser, function(req, res) {
-    var obj = JSON.parse(fs.readFileSync(__dirname + "/recipes/" + "all.json", 'utf8'));
-    res.render("search", obj);
-})
 
-app.post('/search_recipes', urlencodedParser, function(req, res) {
-    var obj = JSON.parse(fs.readFileSync(__dirname + "/recipes/" + "all.json", 'utf8'));
-    res.render("search", obj);
-})
+//app.post('/checkingredients', home.checkingredient);
 
-var server = app.listen(8080, function() {
-    var host = server.address().address
-    var port = server.address().port
-    console.log("Example app listening at http://%s:%s", host, port)
-})
+
+//app.post('/', home.checkingredient);
+
+app.post('/',
+    function(req, res) {
+        console.log("Inside login not failure");
+
+        res.redirect('/omlette');
+    });
+
+// Define routes.
+app.get('/eggs',
+  function(req, res) {
+    res.render('omlette', { user: req.user });
+  });
+
+app.get('/potato',
+    function(req, res) {
+        res.render('potatocurry', { user: req.user });
+    });
+
+
+app.get('/', routes.index);
+
+
+
+/*app.post('/',
+
+    function(req, res) {
+        console.log("After clicking search recipe");
+
+        res.render('/potatocurry');
+    });*/
+
+
+
+app.listen(3000);
