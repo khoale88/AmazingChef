@@ -1,24 +1,26 @@
 {
-  "name": "AmazingChef",
-  "version": "0.0.1",
-  "description": "Search cooking recipes based on ingredients",
-  "keywords": [
-    "AmazingChef",
-    "cooking recipes"
-  ],
-  "author": "Khoa Le, Arpita Dixit, Ipsha Mohanty",
-  "license": "Unlicense",
-  "homepage": "https://github.com/khoale88/AmazingChef",
-  "repository": {
-    "type": "git",
-    "url": ""
-  },
-  "bugs": {
-    "url": "https://github.com/khoale88/AmazingChef/issues"
-  },
-  "dependencies": {
-    "body-parser": "^1.18.1",
-    "cookie-parser": "^1.4.3",
-    "express": "^4.15.4"
-  }
+    "name": "AmazingChef",
+    "version": "0.0.1",
+    "description": "Search cooking recipes based on ingredients",
+    "keywords": [
+        "AmazingChef",
+        "cooking recipes"
+    ],
+    "author": "Khoa Le, Arpita Dixit, Ipsha Mohanty",
+    "license": "Unlicense",
+    "homepage": "https://github.com/khoale88/AmazingChef",
+    "repository": {
+        "type": "git",
+        "url": ""
+    },
+    "bugs": {
+        "url": "https://github.com/khoale88/AmazingChef/issues"
+    },
+    "dependencies": {
+        "body-parser": "^1.18.1",
+        "cookie-parser": "^1.4.3",
+        "ejs": "^2.5.7",
+        "express": "^4.15.4",
+        "html": "^1.0.0"
+    }
 }

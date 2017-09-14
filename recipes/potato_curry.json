@@ -1,0 +1,86 @@
+{
+    "recipe_name": "potato_curry",
+    "ingredients": [{
+            "name": "potato",
+            "note": "peeled and cubed",
+            "quality": "4",
+            "metric": "count"
+        },
+        {
+            "name": "vegetable oil",
+            "quantity": "2",
+            "metric": "Tbsp"
+        },
+        {
+            "name": "yellow onion",
+            "note": "diced",
+            "quantity": "1",
+            "metric": "count"
+        },
+        {
+            "name": "cloves garlic",
+            "note": "minced",
+            "quantity": "3",
+            "metric": "dash"
+        },
+        {
+            "name": "ground cumin",
+            "quantity": "2",
+            "metric": "tsp"
+        },
+        {
+            "name": "cayenne pepper",
+            "quantity": "1.5",
+            "metric": "tsp"
+        },
+        {
+            "name": "curry powder",
+            "quantity": "4",
+            "metric": "tsp"
+        },
+        {
+            "name": "Garam masala",
+            "quantity": "4",
+            "metric": "tsp"
+        },
+        {
+            "name": "fresh ginger",
+            "note": "peeled and minced",
+            "quantity": "1",
+            "metric": "inch"
+        },
+        {
+            "name": "peas",
+            "quantity": "1",
+            "metric": "cup"
+        },
+        {
+            "name": "salt",
+            "quantity": "2",
+            "metric": "tsp"
+        },
+        {
+            "name": "tomatoes",
+            "note": "diced",
+            "quantity": "1",
+            "metric": "cup"
+        },
+        {
+            "name": "coconut milk",
+            "quantity": "1",
+            "metric": "cup"
+        }
+    ],
+    "image": {
+        "type": "url",
+        "source": "https://yummyindiankitchen.com/wp-content/uploads/2017/04/aloo-matar-ki-sabzi.jpg"
+    },
+    "direction": {
+        "1": "Pace potatoes into a large pot and cover with salted water. Bring to a boil over high heat, then reduce heat to medium-low, cover, and simmer until just tender, about 15 minutes. Drain and allow to steam dry for a minute or two.",
+        "2": "Meanwhile, heat the vegetable oil in a large skillet over medium heat. Stir in the onion and garlic; cook and stir until the onion has softened and turned translucent, about 5 minutes. Season with cumin, cayenne pepper, curry powder, garam masala, ginger, and salt; cook for 2 minutes more. Add the tomatoes, and potatoes. Pour in the coconut milk, and bring to a simmer. Simmer 5 to 10 minutes before serving."
+    },
+    "cruisine_type": ["Indian"],
+    "meal_type": ["lunch", "dinner", "heavy"],
+    "dietary": ["normal", "vegetarian"],
+    "cook_time": 20
+}

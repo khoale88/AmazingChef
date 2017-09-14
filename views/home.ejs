@@ -2,22 +2,12 @@
 <html>
 
 <head>
-
-    <!-- your webpage info goes here -->
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
     <title>My First Website</title>
 
     <meta name="author" content="your name" />
     <meta name="description" content="" />
-
-    <!-- you should always add your stylesheet (css) in the head tag so that it starts loading before the page html is being displayed -->
-    <!--<link rel="stylesheet" href="style.css" type="text/css" />
-	<style type="text/css">
-		div{
-			padding:8px;
-		}
-	</style>-->
 
 
     <script>
@@ -44,14 +34,6 @@
                 counter--;
                 $("#TextBoxDiv" + counter).remove();
             });
-            $("#getButtonValue").click(function() {
-                var msg = '';
-                for (i = 1; i < counter; i++) {
-                    msg += "\n Textbox #" + i + " : " + $('#textbox' + i).val();
-                }
-                //search();
-                alert(msg);
-            });
         });
     </script>
 
@@ -59,8 +41,6 @@
 </head>
 
 <body ng-app="home" ng-controller="home">
-
-
     <div id="page">
         <div id="logo">
             <h1><a href="/" id="logoLink">WELCOME TO AMAZING CHEF</a></h1>
@@ -83,16 +63,9 @@
         <input type='button' value='Remove Ingredient' id='removeButton'>
         <!-- <input type='button' value='Search Recipe' id='getButtonValue'> -->
 
-
         <p id="demo"></p>
-
-
-
     </div>
 
-
 </body>
-
-
 
 </html>

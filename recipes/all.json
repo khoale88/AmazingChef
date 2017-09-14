@@ -46,56 +46,93 @@
             "cruisine_type": ["France"],
             "meal_type": ["breakfast", "light"],
             "dietary": ["normal"],
-            "cook_time": 10 // in minute
+            "cook_time": 10
         },
         {
-            "recipe_name": "Omlette",
+            "recipe_name": "potato_curry",
             "ingredients": [{
-                    "name": "egg",
-                    "quality": "2",
+                    "name": "potato",
+                    "note": "peeled and cubed",
+                    "quality": "4",
                     "metric": "count"
                 },
                 {
-                    "name": "water",
+                    "name": "vegetable oil",
                     "quantity": "2",
                     "metric": "Tbsp"
                 },
                 {
-                    "name": "salt",
-                    "quantity": "1/8",
-                    "metric": "tsp"
+                    "name": "yellow onion",
+                    "note": "diced",
+                    "quantity": "1",
+                    "metric": "count"
                 },
                 {
-                    "name": "pepper",
-                    "quantity": "1",
+                    "name": "cloves garlic",
+                    "note": "minced",
+                    "quantity": "3",
                     "metric": "dash"
                 },
                 {
-                    "name": "butter",
-                    "quantity": "1",
+                    "name": "ground cumin",
+                    "quantity": "2",
                     "metric": "tsp"
                 },
                 {
-                    "name": "optional",
-                    "note": "shredded cheese, finely chopped ham, baby spinach",
-                    "quantity": "1/2",
+                    "name": "cayenne pepper",
+                    "quantity": "1.5",
+                    "metric": "tsp"
+                },
+                {
+                    "name": "curry powder",
+                    "quantity": "4",
+                    "metric": "tsp"
+                },
+                {
+                    "name": "Garam masala",
+                    "quantity": "4",
+                    "metric": "tsp"
+                },
+                {
+                    "name": "fresh ginger",
+                    "note": "peeled and minced",
+                    "quantity": "1",
+                    "metric": "inch"
+                },
+                {
+                    "name": "peas",
+                    "quantity": "1",
+                    "metric": "cup"
+                },
+                {
+                    "name": "salt",
+                    "quantity": "2",
+                    "metric": "tsp"
+                },
+                {
+                    "name": "tomatoes",
+                    "note": "diced",
+                    "quantity": "1",
+                    "metric": "cup"
+                },
+                {
+                    "name": "coconut milk",
+                    "quantity": "1",
                     "metric": "cup"
                 }
             ],
             "image": {
                 "type": "url",
-                "source": "https://www.incredibleegg.org/wp-content/uploads/basic-french-omelet-930x550.jpg"
+                "source": "https://yummyindiankitchen.com/wp-content/uploads/2017/04/aloo-matar-ki-sabzi.jpg"
             },
             "direction": {
-                "1": "BEAT eggs, water, salt and pepper in small bowl until blended.",
-                "2": "HEAT butter in 7 to 10-inch non-stick omelette pan or skillet over medium-high heat until hot. TILT pan to coat bottom. POUR IN egg mixture. Mixture should set immediately at edges.",
-                "3": "GENTLY PUSH cooked portions from edges toward the centre with inverted turner so that uncooked eggs can reach the hot pan surface. CONTINUE cooking, tilting pan and gently moving cooked portions as needed.",
-                "4": "When top surface of eggs is thickened and no visible liquid egg remains, PLACE filling on one side of the omelette. FOLD omelette in half with turner. With a quick flip of the wrist, turn pan and INVERT or SLIDE omelette onto plate. SERVE immediately."
+                "1": "Pace potatoes into a large pot and cover with salted water. Bring to a boil over high heat, then reduce heat to medium-low, cover, and simmer until just tender, about 15 minutes. Drain and allow to steam dry for a minute or two.",
+                "2": "Meanwhile, heat the vegetable oil in a large skillet over medium heat. Stir in the onion and garlic; cook and stir until the onion has softened and turned translucent, about 5 minutes. Season with cumin, cayenne pepper, curry powder, garam masala, ginger, and salt; cook for 2 minutes more. Add the tomatoes, and potatoes. Pour in the coconut milk, and bring to a simmer. Simmer 5 to 10 minutes before serving."
             },
-            "cruisine_type": ["France"],
-            "meal_type": ["breakfast", "light"],
-            "dietary": ["normal"],
-            "cook_time": 10 // in minute
+            "cruisine_type": ["Indian"],
+            "meal_type": ["lunch", "dinner", "heavy"],
+            "dietary": ["normal", "vegetarian"],
+            "cook_time": 20
         }
     ]
 }
