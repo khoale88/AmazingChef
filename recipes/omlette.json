@@ -2,7 +2,7 @@
     "recipe_name": "Omlette",
     "ingredients": [{
             "name": "egg",
-            "quality": "2",
+            "quantity": "2",
             "metric": "count"
         },
         {
