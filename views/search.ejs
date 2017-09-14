@@ -12,7 +12,7 @@
 <body>
     <% for (var i = 0; i < recipes.length; i++) { %>
         <div>
-            <img src="<%=recipes[i]['image']['source']%>" style="width:200px;height:200px;" /></br>
+            <a href="<%=recipes[i]['href']%>"><img src="<%=recipes[i]['image']['source']%>" style="width:200px;height:200px;" /><a></br>
             <%=recipes[i]['recipe_name']%>
                 </br><br>
         </div>
