@@ -4,7 +4,7 @@
 <head>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
-    <title>My First Website</title>
+    <title>Amzing Chef</title>
 
     <meta name="author" content="your name" />
     <meta name="description" content="" />
@@ -12,27 +12,31 @@
 
     <script>
         $(document).ready(function() {
-            var counter = 2;
+            var counter = 0;
             $("#addButton").click(function() {
-                if (counter > 10) {
-                    alert("Only 10 textboxes allow");
-                    return false;
-                }
+                var fc = ('0' + (counter + 1)).slice(-2);
                 var newTextBoxDiv = $(document.createElement('div'))
                     .attr("id", 'TextBoxDiv' + counter);
-                newTextBoxDiv.after().html('<label>Ingredient #' + counter + ' : </label>' +
-                    '<input type="text" name="textbox' + counter +
-                    '" id="textbox' + counter + '" value="" >');
+                // newTextBoxDiv.after().html('<label>Ingredient #' + counter + ' : </label>' +
+                //     '<input type="text" name="textbox' + counter +
+                //     '" id="textbox' + counter + '" value="" >');
+                var html =
+                    '<label>Ingredient #' + fc + ': </label>' +
+                    '<input type="text" name="textbox' + fc + '" id="textbox' + fc + '" value="">';
+                newTextBoxDiv.after().html(html);
+
                 newTextBoxDiv.appendTo("#TextBoxesGroup");
                 counter++;
+                if (counter == 2) {
+                    document.getElementById("removeButton").disabled = false;
+                }
             });
             $("#removeButton").click(function() {
-                if (counter == 1) {
-                    alert("No more textbox to remove");
-                    return false;
-                }
                 counter--;
                 $("#TextBoxDiv" + counter).remove();
+                if (counter == 1) {
+                    document.getElementById("removeButton").disabled = true;
+                }
             });
         });
     </script>
@@ -40,28 +44,26 @@
 
 </head>
 
-<body ng-app="home" ng-controller="home">
+<body ng-app="home" ng-controller="home" onload="document.getElementById('addButton').click()">
     <div id="page">
         <div id="logo">
             <h1><a href="/" id="logoLink">WELCOME TO AMAZING CHEF</a></h1>
             <img src="https://thumbs.dreamstime.com/z/amazing-cook-woman-chef-holding-tray-isolated-white-37194931.jpg" style="margin-right:90%" width="300px" height 228px>
 
         </div>
-        <form action="search_recipes" method="post">
+        <form id="ingreForm" action="search_recipes" method="post">
             <div id='TextBoxesGroup'>
 
-                <div id="TextBoxDiv1">
+                <!-- <div id="TextBoxDiv1">
                     <label>Ingredient #1 : </label><input type='textbox' id='textbox1' name='ingredient1'>
-                </div>
-
+                </div> -->
 
             </div>
-            <input type='submit' value='SearchRecipe' id='searchRecipes'>
+            <input type='button' value='Add Ingredient' id='addButton'>
+            <input type='button' value='Remove Ingredient' id='removeButton' disabled=true>
+            <input type='submit' value='Search Recipe' id='searchRecipes'>
+            <!-- <input type='button' value='Search Recipe' id='getButtonValue' onclick="document.getElementById('ingreForm').submit()"> -->
         </form>
-
-        <input type='button' value='Add Ingredient' id='addButton'>
-        <input type='button' value='Remove Ingredient' id='removeButton'>
-        <!-- <input type='button' value='Search Recipe' id='getButtonValue'> -->
 
         <p id="demo"></p>
     </div>
