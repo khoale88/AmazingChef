@@ -66,10 +66,12 @@ function searching(ingredients) {
         if (ingredients[i] === "egg") {
             var recipe = JSON.parse(fs.readFileSync(__dirname + "/recipes/" + "omlette.json", 'utf8'));
             recipes.push(recipe);
+            continue;
         }
         if (ingredients[i] === "potato") {
             var recipe = JSON.parse(fs.readFileSync(__dirname + "/recipes/" + "potato_curry.json", 'utf8'));
             recipes.push(recipe);
+            continue;
         }
     }
     return recipes;
