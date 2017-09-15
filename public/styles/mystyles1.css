@@ -7,5 +7,32 @@ h1 {
 }
 
 body {
-    background-color:lightyellow;
+    background-color: lightyellow;
+}
+
+input:invalid {
+    color: white;
+    background-color: red;
+}
+
+
+/* input:valid {
+    background-color: #A3EEA3;
+} */
+
+input:required {
+    border: 1px solid blue;
+}
+
+fieldset {
+    width: 18em;
+    /* background-color: #CCEEF0; */
+    box-shadow: 5px 5px 5px gray;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.centerrr {
+    margin-left: auto;
+    margin-right: auto;
 }

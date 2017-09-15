@@ -18,15 +18,22 @@
             <img src="/images/welcomeChef.jpg" style="margin-right:90%" width="300px" height 228px>
         </div>
 
-        <form id="ingreForm" action="search_recipes" method="post">
-            <div id="TextBoxesGroup">
+        <form id="ingreForm" action="search_recipes" method="get">
+            <fieldset>
+                <legend>Ingredients input</legend>
+                <div id="TextBoxesGroup">
 
+                </div>
+            </fieldset>
+            <div id="ingreButtonGroup" class="center">
+                <input type="button" value="Add Ingredient" id="addButton" onclick=addIngredient()>
+                <input type="button" value="Remove Ingredient" id="removeButton" disabled=true onclick=removeIngredient()>
+                <input type="submit" value="Search Recipe" id="searchButton">
             </div>
+
         </form>
 
-        <input type="button" value="Add Ingredient" id="addButton" onclick=addIngredient()>
-        <input type="button" value="Remove Ingredient" id="removeButton" disabled=true onclick=removeIngredient()>
-        <input type="button" value="Search Recipe" id="searchButton" onclick=search()>
+
 
     </div>
 

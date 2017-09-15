@@ -13,7 +13,9 @@ function addIngredient() {
         .attr("id", 'TextBoxDiv' + ingre_counter);
     var html =
         '<label>Ingredient #' + fc + ': </label>' +
-        '<input type="text" name="textbox' + fc + '" id="textbox' + fc + '" value="">';
+        '<input type="text" name="textbox' + fc + '" id="textbox' + fc +
+        '" placeholder="ingredient"' +
+        'pattern="^[a-zA-Z][a-zA-Z\s]+$" required>';
     newTextBoxDiv.after().html(html);
     console.log(newTextBoxDiv);
     newTextBoxDiv.appendTo("#TextBoxesGroup");
