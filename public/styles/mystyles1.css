@@ -15,17 +15,12 @@ input:invalid {
     background-color: red;
 }
 
-#TextBoxesGroup input:valid {
-    color: green;
-    font-weight: bold;
-}
-
 input:required {
     border: 1px solid blue;
 }
 
 fieldset {
-    width: 18em;
+    width: 15.5em;
     /* background-color: #CCEEF0; */
     box-shadow: 5px 5px 5px gray;
     margin-left: auto;
@@ -37,4 +32,15 @@ fieldset {
     margin-top: 1em;
     margin-left: auto;
     margin-right: auto;
+}
+
+#TextBoxesGroup input:valid {
+    color: green;
+    /* font-weight: bold; */
+}
+
+#TextBoxesGroup input[type=text] {
+    margin-left: 3px;
+    padding-left: 3px;
+    padding-right: 3px;
 }
