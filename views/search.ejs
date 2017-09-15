@@ -8,19 +8,26 @@
 
     <title>My First Website</title>
     <script>
-        var recipes = "<%=recipes%>";
-        console.log(recipes);
+        var recipes = JSON.parse('<%-JSON.stringify(recipes)%>');
+
+        function init() {
+            for (var i = 0; i < recipes.length; i++) {
+                var recipe = recipes[i];
+                var href = '<a href="' + recipe["href"] + '">';
+                var img = '<img src="' + recipe['image']['source'] + '" style="width:200px;height:200px"></a>';
+                var div = document.createElement("div");
+                div.id = recipe["recipe_name"];
+                div.innerHTML = '<p>' + href + img + '<br>' + recipe['recipe_name'] + '</p>';
+                document.getElementById("recipeContainer").appendChild(div);
+            }
+        }
     </script>
 </head>
 
-<body>
-    <% for (var i = 0; i < recipes.length; i++) { %>
-        <div>
-            <a href="<%=recipes[i]['href']%>"><img src="<%=recipes[i]['image']['source']%>" style="width:200px;height:200px;" /><a></br>
-            <%=recipes[i]['recipe_name']%>
-                </br><br>
-        </div>
-        <%}%>
+<body onload=init()>
+    <div id="recipeContainer">
+
+    </div>
 </body>
 
 

@@ -1,54 +1,44 @@
 <!DOCTYPE html>
 <html>
 
-<body>
-    <%if (recipe){%>
-        <h2>
-            <%=recipe["recipe_name"]%>
-        </h2>
-        <img src="<%=recipe['image']['source']%>" style="width:304px;height:228px;">
+<head>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="/scripts/recipe.js" type="text/javascript"></script>
+    <script>
+        var recipe = JSON.parse('<%-JSON.stringify(recipe)%>');
 
+        function init() {
+            // set recipe name
+            document.getElementById('recipe_name')
+                .innerHTML = recipe['recipe_name'];
 
-        <div>
+            // setup image;
+            init_img(recipe);
+
+            init_ingredients(recipe);
+            init_direction(recipe);
+        }
+    </script>
+</head>
+
+<body onload=init()>
+    <h2 id='recipe_name'></h2>
+    <img id='recipe_img'>
+    <div id='recipe_content'>
+        <div id='ingredients'>
             <p><b>Ingredients</b></p>
-
-            <table border="1">
-
+            <table id='ingredient_table'>
                 <tr>
-                    <th>Ingredient</th>
+                    <th>Ingrdient</th>
                     <th>Quantity</th>
+                    <th>Note</th>
                 </tr>
-                <%for(var i=0; i<recipe["ingredients"].length; i++){%>
-                    <tr>
-                        <td>
-                            <%=recipe["ingredients"][i]["name"]%>
-                        </td>
-                        <td>
-                            <%=recipe["ingredients"][i]["quantity"] + " " + recipe["ingredients"][i]["metric"]%>
-                        </td>
-                    </tr>
-                    <%}%>
             </table>
-
-
-            <p><b>Direction</b></p>
-
-            <p>
-
-                <ol>
-                    <%for(var step in recipe["direction"]){%>
-                        <li>
-                            <%=recipe["direction"][step]%>
-                        </li>
-                        <%}%>
-                </ol>
-
-            </p>
-
-
         </div>
-        <%}%>
-
+        <div id='direction'>
+            <p><b>Direction</b></p>
+        </div>
+    </div>
 </body>
 
 </html>

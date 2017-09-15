@@ -1,83 +1,35 @@
 <!DOCTYPE html>
 <html>
+
 <head>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
+    <title>Amzing Chef</title>
 
-	<meta charset="UTF-8">
-	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-
-	<title>Amazing Chef</title>
-
-	<link rel="stylesheet" href="/styles/mystyles1.css">
-	<script>
-        $(document).ready(function(){
-            var counter = 2;
-            $("#addButton").click(function () {
-                if(counter>10){
-                    alert("Only 10 textboxes allow");
-                    return false;
-                }
-                var newTextBoxDiv = $(document.createElement('div'))
-                    .attr("id", 'TextBoxDiv' + counter);
-                newTextBoxDiv.after().html('<label>Ingredient #'+ counter + ' : </label>' +
-                    '<input type="text" name="textbox' + counter +
-                    '" id="textbox' + counter + '" value="" >');
-                newTextBoxDiv.appendTo("#TextBoxesGroup");
-                counter++;
-            });
-            $("#removeButton").click(function () {
-                if(counter==1){
-                    alert("No more textbox to remove");
-                    return false;
-                }
-                counter--;
-                $("#TextBoxDiv" + counter).remove();
-            });
-            $("#getButtonValue").click(function () {
-                var msg = '';
-                for(i=1; i<counter; i++){
-                    msg += "\n Textbox #" + i + " : " + $('#textbox' + i).val();
-                }
-                //search();
-                alert(msg);
-            });
-        });
-	</script>
-
-
+    <link rel="stylesheet" href="/styles/mystyles1.css">
+    <script src="/scripts/home.js" type="text/javascript"></script>
 </head>
-<body ng-app="home" ng-controller="home">
 
+<body ng-app="home" ng-controller="home" onload=init()>
+    <div id="page">
 
-<div id="page">
-	<div id="logo">
-		<h1> WELCOME TO AMAZING CHEF </h1>
-		<img src="http://static.vectorcharacters.net/uploads/2013/06/Cartoon_Chef_Vector_Character_Preview.jpg" style="margin-right:90%" width="300px" height 228px>
+        <div id="logo">
+            <h1><a href="/" id="logoLink">WELCOME TO AMAZING CHEF</a></h1>
+            <img src="/images/welcomeChef.jpg" style="margin-right:90%" width="300px" height 228px>
+        </div>
 
-	</div>
+        <form id="ingreForm" action="search_recipes" method="post">
+            <div id="TextBoxesGroup">
 
-	<div id='TextBoxesGroup'>
-		<div id="TextBoxDiv1">
-			<label>Ingredient #1 : </label><input type='textbox' id='textbox1' name = 'ingredient1' >
-		</div>
-	</div>
+            </div>
+        </form>
 
+        <input type="button" value="Add Ingredient" id="addButton" onclick=addIngredient()>
+        <input type="button" value="Remove Ingredient" id="removeButton" disabled=true onclick=removeIngredient()>
+        <input type="button" value="Search Recipe" id="searchButton" onclick=search()>
 
-	<input type='button' value='Add Ingredient' id='addButton'>
-	<input type='button' value='Remove Ingredient' id='removeButton'>
-	<input type='button' value='Search Recipe' id='Search'>
-
-
-
-	<p id="demo"></p>
-
-
-
-</div>
-
+    </div>
 
 </body>
-
-
 
 </html>

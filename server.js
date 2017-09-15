@@ -1,14 +1,8 @@
 var express = require('express');
-var passport = require('passport');
-var Strategy = require('passport-local').Strategy;
-var db = require('./db');
-var routes	= require('./routes');
-var home = require("./routes/home");
-
 
 // Create a new Express pplication.
 var app = express();
-
+var fs = require('fs');
 // Configure view engine to render EJS templates.
 app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs');
@@ -16,54 +10,65 @@ app.set('view engine', 'ejs');
 app.use(express.static('public'));
 
 // Use application-level middleware for common functionality, including
-// logging, parsing, and session handling.
-app.use(require('morgan')('combined'));
-app.use(require('cookie-parser')());
-app.use(require('body-parser').urlencoded({ extended: true }));
-app.use(require('express-session')({ secret: 'keyboard cat', resave: false, saveUninitialized: false }));
+// parsing, 
+// app.use(require('body-parser').urlencoded({ extended: true }));
+var bodyParser = require('body-parser');
 
-// Initialize Passport and restore authentication state, if any, from the
-// session.
-app.use(passport.initialize());
-app.use(passport.session());
+// Create application/x-www-form-urlencoded parser
+var urlencodedParser = bodyParser.urlencoded({ extended: false })
 
+// base URL to read a recipe
+var recipeURL = "/recipe"
 
-//app.post('/checkingredients', home.checkingredient);
+// home page
+app.get("/", function(req, res) {
+    res.render("home.ejs");
+})
 
-
-//app.post('/', home.checkingredient);
-
-app.post('/',
+// see each recipe
+app.get("/recipe/:recipe_id",
     function(req, res) {
-        console.log("Inside login not failure");
+        var recipe = JSON.parse(fs.readFileSync(__dirname + "/recipes/" + req.params["recipe_id"] + ".json", 'utf8'));
+        res.render("recipe", { recipe: recipe });
+    }
+)
 
-        res.redirect('/omlette');
-    });
-
-// Define routes.
-app.get('/eggs',
-  function(req, res) {
-    res.render('omlette', { user: req.user });
-  });
-
-app.get('/potato',
+// search recipes by get
+app.get('/search_recipes', urlencodedParser,
     function(req, res) {
-        res.render('potatocurry', { user: req.user });
-    });
+        var omlette = JSON.parse(fs.readFileSync(__dirname + "/recipes/" + "omlette.json", 'utf8'));
+        var potato_curry = JSON.parse(fs.readFileSync(__dirname + "/recipes/" + "potato_curry.json", 'utf8'));
+        var recipes = [];
+        recipes.push(omlette);
+        recipes.push(potato_curry);
+        for (var i = 0; i < recipes.length; i++) {
+            var href = recipeURL + "/" + recipes[i]["recipe_name"].toLowerCase();
+            recipes[i]["href"] = href;
+        }
+        res.render("search", { recipes: recipes });
+    }
+)
 
-
-app.get('/', routes.index);
-
-
-
-/*app.post('/',
-
+// search recipes by post
+app.post('/search_recipes', urlencodedParser,
     function(req, res) {
-        console.log("After clicking search recipe");
+        var omlette = JSON.parse(fs.readFileSync(__dirname + "/recipes/" + "omlette.json", 'utf8'));
+        var potato_curry = JSON.parse(fs.readFileSync(__dirname + "/recipes/" + "potato_curry.json", 'utf8'));
+        var recipes = [];
+        recipes.push(omlette);
+        recipes.push(potato_curry);
+        for (var i = 0; i < recipes.length; i++) {
+            var href = recipeURL + "/" + recipes[i]["recipe_name"].toLowerCase();
+            recipes[i]["href"] = href;
+        }
+        res.render("search", { recipes: recipes });
+    }
+)
 
-        res.render('/potatocurry');
-    });*/
-
-
-
-app.listen(3000);
+var server = app.listen(3000,
+    function() {
+        var host = server.address().address
+        var port = server.address().port
+        console.log("Example app listening at http://%s:%s", host, port)
+    }
+)
