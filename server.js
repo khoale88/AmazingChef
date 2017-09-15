@@ -1,6 +1,6 @@
 var express = require('express');
 
-// Create a new Express pplication.
+// Create a new Express application.
 var app = express();
 var fs = require('fs');
 // Configure view engine to render EJS templates.

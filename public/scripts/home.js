@@ -1,8 +1,8 @@
-const DEFAULT_INGR_CNT = 1
+const INGR_CNT_MIN = 2
 var ingre_counter = 0;
 
 function init() {
-    for (var i = 0; i < DEFAULT_INGR_CNT; i++) {
+    for (var i = 0; i < INGR_CNT_MIN; i++) {
         document.getElementById('addButton').click();
     }
 }
@@ -18,7 +18,7 @@ function addIngredient() {
     console.log(newTextBoxDiv);
     newTextBoxDiv.appendTo("#TextBoxesGroup");
     ingre_counter++;
-    if (ingre_counter == (DEFAULT_INGR_CNT + 1)) {
+    if (ingre_counter == (INGR_CNT_MIN + 1)) {
         document.getElementById("removeButton").disabled = false;
     }
 };
@@ -26,7 +26,7 @@ function addIngredient() {
 function removeIngredient() {
     ingre_counter--;
     $("#TextBoxDiv" + ingre_counter).remove();
-    if (ingre_counter == DEFAULT_INGR_CNT) {
+    if (ingre_counter == INGR_CNT_MIN) {
         document.getElementById("removeButton").disabled = true;
     }
 };
