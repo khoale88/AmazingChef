@@ -15,10 +15,10 @@ input:invalid {
     background-color: red;
 }
 
-
-/* input:valid {
-    background-color: #A3EEA3;
-} */
+#TextBoxesGroup input:valid {
+    color: green;
+    font-weight: bold;
+}
 
 input:required {
     border: 1px solid blue;
@@ -32,7 +32,9 @@ fieldset {
     margin-right: auto;
 }
 
-.centerrr {
+.centerButtons {
+    width: 21.5em;
+    margin-top: 1em;
     margin-left: auto;
     margin-right: auto;
 }
