@@ -8,7 +8,6 @@ html,
 body {
     min-height: 100%;
     height: 100%;
-    /* padding: 0; */
     margin: auto;
 }
 
@@ -120,8 +119,4 @@ fieldset {
     height: 150px;
     width: 200px;
     border-radius: 50%;
-}
-
-.div-center {
-    margin: auto;
 }

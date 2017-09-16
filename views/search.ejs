@@ -5,9 +5,17 @@
 
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <link rel="stylesheet" href="/styles/mystyles1.css">
+    <script src="/scripts/search.js" type="text/javascript"></script>
     <script src="/scripts/recipe.js" type="text/javascript"></script>
     <title>Amazing Chef</title>
     <script>
+        var recipes = JSON.parse('<%-JSON.stringify(recipes)%>');
+
+        function init() {
+            init_container(recipes);
+        }
+    </script>
+    <!-- <script>
         var recipes = JSON.parse('<%-JSON.stringify(recipes)%>');
 
         function init() {
@@ -30,8 +38,8 @@
             }
         }
 
-        function display_recipe(obj) {
-            var recipe = recipes[obj.getAttribute('data-r_index')];
+        function display_recipe(element) {
+            var recipe = recipes[element.getAttribute('data-r_index')];
             document.getElementById('recipe_name')
                 .innerHTML = recipe['recipe_name'].replace("_", " ");
             init_img(recipe);
@@ -44,7 +52,7 @@
                 recipeDisplay.style.display = "block";
             }
         }
-    </script>
+    </script> -->
 </head>
 
 <body onload=init()>

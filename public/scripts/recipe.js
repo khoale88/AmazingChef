@@ -27,7 +27,7 @@ function init_direction(recipe) {
     var direction = document.getElementById("direction");
     var steps = document.getElementById("steps");
     if (steps) {
-        direction.removeChild();
+        direction.removeChild(steps);
     }
 
     var p = document.createElement('p');
