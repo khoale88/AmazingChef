@@ -1,13 +1,14 @@
 function init_img(recipe) {
     var img = document.getElementById('recipe_img');
     img.setAttribute('src', recipe['image']['source']);
-    img.setAttribute('width', '304px');
-    img.setAttribute('height', '228px');
+    img.setAttribute('width', '300px');
 }
 
 function init_ingredients(recipe) {
     var tbl = document.getElementById('ingredient_table');
-    tbl.setAttribute('border', '1');
+    for (var i = tbl.rows.length - 1; i > 0; i--) {
+        tbl.deleteRow(i);
+    }
     for (var i = 0; i < recipe['ingredients'].length; i++) {
         row = tbl.insertRow(i + 1);
         var ingredient = row.insertCell(0);
@@ -23,7 +24,14 @@ function init_ingredients(recipe) {
 }
 
 function init_direction(recipe) {
+    var direction = document.getElementById("direction");
+    var steps = document.getElementById("steps");
+    if (steps) {
+        direction.removeChild();
+    }
+
     var p = document.createElement('p');
+    p.id = "steps";
     var ol = document.createElement('ol');
     for (var i in recipe['direction']) {
         var li = document.createElement('li');
@@ -31,6 +39,6 @@ function init_direction(recipe) {
         ol.appendChild(li);
     }
     p.appendChild(ol);
-    document.getElementById("direction")
-        .appendChild(p);
+
+    direction.appendChild(p);
 }

@@ -7,24 +7,6 @@ function init() {
     }
 }
 
-// function addIngredient() {
-//     var fc = ('0' + (ingre_counter + 1)).slice(-2);
-//     var newTextBoxDiv = $(document.createElement('div'))
-//         .attr("id", 'TextBoxDiv' + ingre_counter);
-//     var html =
-//         '<label>Ingredient #' + fc + ': </label>' +
-//         '<input type="text" name="textbox' + fc + '" id="textbox' + fc +
-//         '" placeholder="ingredient"' +
-//         'pattern="^[a-zA-Z][a-zA-Z\s]+$" required>';
-//     newTextBoxDiv.after().html(html);
-//     console.log(newTextBoxDiv);
-//     newTextBoxDiv.appendTo("#TextBoxesGroup");
-//     ingre_counter++;
-//     if (ingre_counter == (INGR_CNT_MIN + 1)) {
-//         document.getElementById("removeButton").disabled = false;
-//     }
-// };
-
 function addIngredient() {
     var fc = ('0' + (ingre_counter + 1)).slice(-2);
     var div = $(document.createElement('div'))

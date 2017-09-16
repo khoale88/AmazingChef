@@ -3,6 +3,7 @@
 
 <head>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="/styles/mystyles1.css">
     <script src="/scripts/recipe.js" type="text/javascript"></script>
     <script>
         var recipe = JSON.parse('<%-JSON.stringify(recipe)%>');
@@ -14,7 +15,6 @@
 
             // setup image;
             init_img(recipe);
-
             init_ingredients(recipe);
             init_direction(recipe);
         }
@@ -22,21 +22,23 @@
 </head>
 
 <body onload=init()>
-    <h2 id='recipe_name'></h2>
-    <img id='recipe_img'>
-    <div id='recipe_content'>
-        <div id='ingredients'>
-            <p><b>Ingredients</b></p>
-            <table id='ingredient_table'>
-                <tr>
-                    <th>Ingrdient</th>
-                    <th>Quantity</th>
-                    <th>Note</th>
-                </tr>
-            </table>
-        </div>
-        <div id='direction'>
-            <p><b>Direction</b></p>
+    <div id="page">
+        <h2 id='recipe_name'></h2>
+        <center><img id='recipe_img'></center>
+        <div id='recipe_content'>
+            <div id='ingredients'>
+                <p><b>Ingredients</b></p>
+                <table id='ingredient_table'>
+                    <tr>
+                        <th>Ingrdient</th>
+                        <th>Quantity</th>
+                        <th>Note</th>
+                    </tr>
+                </table>
+            </div>
+            <div id='direction'>
+                <p><b>Direction</b></p>
+            </div>
         </div>
     </div>
 </body>
