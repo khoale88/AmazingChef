@@ -1,18 +1,19 @@
 h1 {
-    border: 1px solid black;
-    margin-top: 100px;
-    margin-bottom: 100px;
-    margin-right: 150px;
-    background-color: lightblue;
+    text-align: center;
 }
 
 body {
     background-color: lightyellow;
+    margin: auto;
+    height: 100%;
+}
+
+html {
+    height: 100%;
 }
 
 input:invalid {
-    color: white;
-    background-color: red;
+    background-color: #FBCCCC;
 }
 
 input:required {
@@ -20,16 +21,18 @@ input:required {
 }
 
 fieldset {
-    width: 15.5em;
-    /* background-color: #CCEEF0; */
+    width: 16em;
     box-shadow: 5px 5px 5px gray;
     margin-left: auto;
     margin-right: auto;
+    margin-top: 1em;
+    margin-bottom: 1em;
 }
 
 .centerButtons {
     width: 21.5em;
     margin-top: 1em;
+    margin-bottom: 1em;
     margin-left: auto;
     margin-right: auto;
 }
@@ -40,7 +43,19 @@ fieldset {
 }
 
 #TextBoxesGroup input[type=text] {
-    margin-left: 3px;
+    margin-left: 5px;
     padding-left: 3px;
     padding-right: 3px;
+}
+
+#page {
+    width: 750px;
+    height: 100%;
+    border-left: 4px solid #F3F3D0;
+    border-right: 4px solid #F3F3D0;
+    margin: auto;
+    padding-top: .1em;
+    padding-bottom: .1px;
+    padding-left: 10px;
+    padding-right: 10px;
 }
