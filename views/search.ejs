@@ -6,12 +6,12 @@
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <link rel="stylesheet" href="/styles/mystyles1.css">
     <script src="/scripts/recipe.js" type="text/javascript"></script>
-    <title>My First Website</title>
+    <title>Amazing Chef</title>
     <script>
         var recipes = JSON.parse('<%-JSON.stringify(recipes)%>');
 
         function init() {
-            document.getElementById("notification").innerHTML = recipes.length + " recipes has been found.";
+            document.getElementById("notification").innerHTML = recipes.length + " recipes have been found.";
             if (recipes.length === 0) {
                 return
             }
