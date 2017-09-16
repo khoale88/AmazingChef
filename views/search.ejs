@@ -19,13 +19,10 @@
             recipeContainer.style.display = "flex";
             for (var i = 0; i < recipes.length; i++) {
                 var recipe = recipes[i];
-                var href = '<a href="' + recipe["href"] + '">';
-                var img = '<img src="' + recipe['image']['source'] + '" style="height:150px"></a>';
+                var img = '<img src="' + recipe['image']['source'] + '">';
                 var div = document.createElement("div");
-                div.id = recipe["recipe_name"];
                 div.innerHTML = '<p>' + img + '<br>' + recipe['recipe_name'] + '</p>';
                 div.setAttribute("id", i);
-                recipe_name = recipe['recipe_name'];
                 div.setAttribute("class", "recipe");
                 div.setAttribute("onclick", "display_recipe(this)");
                 recipeContainer.appendChild(div);

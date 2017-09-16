@@ -68,6 +68,10 @@ fieldset {
     display: flex;
 }
 
+#recipeContainer img {
+    height: 150px;
+}
+
 #recipeDisplay {
     padding: 1em;
     margin-top: 15px;

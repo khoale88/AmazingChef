@@ -36,7 +36,3 @@ function removeIngredient() {
         $("#removeButton").prop("disabled", true);
     }
 };
-
-// function search() {
-//     document.getElementById("ingreForm").submit();
-// }
