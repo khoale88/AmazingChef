@@ -22,7 +22,8 @@
                 var img = '<img src="' + recipe['image']['source'] + '">';
                 var div = document.createElement("div");
                 div.innerHTML = '<p>' + img + '<br>' + recipe['recipe_name'] + '</p>';
-                div.setAttribute("id", i);
+                div.id = recipe['recipe_name'];
+                div.setAttribute("data-r_index", i);
                 div.setAttribute("class", "recipe");
                 div.setAttribute("onclick", "display_recipe(this)");
                 recipeContainer.appendChild(div);
@@ -30,7 +31,7 @@
         }
 
         function display_recipe(obj) {
-            var recipe = recipes[obj.id];
+            var recipe = recipes[obj.getAttribute('data-r_index')];
             document.getElementById('recipe_name')
                 .innerHTML = recipe['recipe_name'].replace("_", " ");
             init_img(recipe);
