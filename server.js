@@ -18,26 +18,10 @@ app.use(express.static('public'));
 // Configure file system package to read file (replacement of database)
 var fs = require('fs');
 
-// base URL to read a recipe
-var recipeURL = "/recipe";
-
 // render home page
 app.get("/", function(req, res) {
     res.render("home");
 })
-
-/* 
- * Api view a recipe
- */
-app.get(recipeURL + "/:recipe_name",
-    function(req, res) {
-        // dynamically read a recipe data given a recipe name
-        // currently not handling not-found recipes
-        var recipe = JSON.parse(fs.readFileSync(__dirname + "/recipes/" + req.params["recipe_name"] + ".json", 'utf8'));
-        // generate dynamic page with data
-        res.render("recipe", { recipe: recipe });
-    }
-)
 
 // api to search recipes based on ingredients
 app.get('/search_recipes',
@@ -46,18 +30,18 @@ app.get('/search_recipes',
         var ingredients = req.query;
         // process form data
         var recipes = searching(ingredients)
-        recipes = recipe_link_generation(recipes);
-
-        // dynamically generating page with data
+            // dynamically generating page with data
         res.render("search", { recipes: recipes });
     }
 )
 
-/*
+/**
  * helper function to search recipes based on ingredients
+ * include omlette recipe data if ingrdients have egg
+ * include potato_curry recipe data if ingredient have potato
  * 
- * params: ingredients: list of ingredients
- * return: array of recipes
+ * @param {*} ingredients list of ingredients
+ * @return  array of recipes
  * 
  */
 function searching(ingredients) {
@@ -73,21 +57,6 @@ function searching(ingredients) {
             recipes.push(recipe);
             continue;
         }
-    }
-    return recipes;
-}
-
-/*  
- * helper function to generate recipe link in href attribute
- * 
- * params: recipes: array of recipes
- * return: array of recipes with href attribute
- * 
- */
-function recipe_link_generation(recipes) {
-    for (var i = 0; i < recipes.length; i++) {
-        var href = recipeURL + "/" + recipes[i]["recipe_name"].toLowerCase();
-        recipes[i]["href"] = href;
     }
     return recipes;
 }

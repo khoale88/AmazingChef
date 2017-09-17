@@ -15,58 +15,25 @@
             init_container(recipes);
         }
     </script>
-    <!-- <script>
-        var recipes = JSON.parse('<%-JSON.stringify(recipes)%>');
-
-        function init() {
-            document.getElementById("notification").innerHTML = recipes.length + " recipes have been found.";
-            if (recipes.length === 0) {
-                return
-            }
-            var recipeContainer = document.getElementById("recipeContainer");
-            recipeContainer.style.display = "flex";
-            for (var i = 0; i < recipes.length; i++) {
-                var recipe = recipes[i];
-                var img = '<img src="' + recipe['image']['source'] + '">';
-                var div = document.createElement("div");
-                div.innerHTML = '<p>' + img + '<br>' + recipe['recipe_name'] + '</p>';
-                div.id = recipe['recipe_name'];
-                div.setAttribute("data-r_index", i);
-                div.setAttribute("class", "recipe");
-                div.setAttribute("onclick", "display_recipe(this)");
-                recipeContainer.appendChild(div);
-            }
-        }
-
-        function display_recipe(element) {
-            var recipe = recipes[element.getAttribute('data-r_index')];
-            document.getElementById('recipe_name')
-                .innerHTML = recipe['recipe_name'].replace("_", " ");
-            init_img(recipe);
-            init_ingredients(recipe);
-            init_direction(recipe);
-
-            var recipeDisplay = document.getElementById("recipeDisplay");
-
-            if (recipeDisplay.style.display === "none") {
-                recipeDisplay.style.display = "block";
-            }
-        }
-    </script> -->
 </head>
 
 <body onload=init()>
     <div id="page">
 
+        <!-- notification let users know how many recipes the system found -->
         <p id="notification" align="center" font-size="30px"></p>
 
+        <!-- recipeContaienr is where recipes' picture are shown
+            user can clicked on this to see a specific recipe's ingredient and direction-->
         <div id="recipeContainer" class="rounded-div" style="display: none">
         </div>
 
+        <!-- recipeDisplay is where a full recipe is shown -->
         <div id="recipeDisplay" class="rounded-div" style="display: none">
             <h2 id='recipe_name'></h2>
             <center><img id='recipe_img'></center>
 
+            <!-- recipeContent includes a table of ingredients and direction -->
             <div id='recipeContent'>
 
                 <div id='ingredients' class="div-center">
@@ -82,7 +49,6 @@
 
                 <div id='direction'>
                     <p><b>Direction</b></p>
-
                 </div>
 
             </div>

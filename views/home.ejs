@@ -12,20 +12,22 @@
 
 <body ng-app="home" ng-controller="home" onload=init()>
     <div id="page">
-
+        <!-- logo includes welcome message and a home picture -->
         <div id="logo">
-            <a href="/" style="text-decoration:none">
+            <a id="welcome-message" href="/" style="text-decoration:none">
                 <h1>WELCOME TO AMAZING CHEF</h1>
             </a>
             <center><img src="/images/welcomeChef.jpg" width="300px"></center>
         </div>
 
+        <!-- ingreForm will submit fromdata via a get request to server when submit button is clicked -->
         <form id="ingreForm" action="search_recipes" method="get" class="ingredientInput">
             <fieldset>
                 <legend align="center"><b>INGREDIENTS</b></legend>
-                <div id="TextBoxesGroup">
 
+                <div id="TextBoxesGroup">
                 </div>
+
             </fieldset>
 
             <div id="ingreButtonGroup" class="centerButtons">
