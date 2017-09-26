@@ -4,14 +4,13 @@
  */
 function init_container(recipes) {
     document.getElementById("notification").innerHTML = recipes.length + " recipes have been found.";
-    if (recipes.length === 0) {
-        return
-    }
+    if (recipes.length === 0) return
+
     // enable visibility for the 1st time
     var recipeContainer = document.getElementById("recipeContainer");
-    if (recipeContainer.style.display !== "flex") {
+    if (recipeContainer.style.display !== "flex")
         recipeContainer.style.display = "flex";
-    }
+
     // display essential recipes' info, including recipe image and recipe name
     for (var i = 0; i < recipes.length; i++) {
         var recipe = recipes[i];
@@ -40,7 +39,6 @@ function display_recipe(element) {
 
     // enable visibility for the 1st time
     var recipeDisplay = document.getElementById("recipeDisplay");
-    if (recipeDisplay.style.display === "none") {
+    if (recipeDisplay.style.display === "none")
         recipeDisplay.style.display = "block";
-    }
 }

@@ -20,6 +20,7 @@ body {
 
 input:invalid {
     background-color: #FBCCCC;
+    /* background-color: rgba(255, 0, 0, .3); */
 }
 
 

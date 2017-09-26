@@ -1,0 +1,92 @@
+html, body, .wrapper{
+    margin:0;
+    padding:0;
+    min-height: 100%;
+    height:100%;
+    /* height:1080px; */
+    width:100%;
+}
+
+#page-header{
+    display: block;
+    background: -webkit-linear-gradient(#3E81B9,#C4E4FF);
+    height: 180px;
+    /* height:16.7%; */
+    width: 100%;
+}
+
+#page-content{
+    display: flex;
+    position: absolute;
+    top: 180px;
+    /* top:16.5%; */
+    bottom: 0;
+    width: 100%;
+    /* height:83.3%; */
+}
+
+.primary-bg{
+    background: -webkit-linear-gradient(#C4E4FF, #FACF8E);
+}
+
+#left-panel{
+    width: 350px;
+    /* width: 18.2%; */
+    height: 100%;
+}
+
+.flex-display{
+    /* position: relative; */
+    display:flex;
+    /* width:100%;
+    height:100%; */
+}
+
+#recipe-container{
+    position: relative;
+    background: #FACF8E;
+    height: 100%;
+    width: 100%;
+}
+
+.test{
+    width:300px;
+    height:200px;
+    background-image: url("https://avatars2.githubusercontent.com/u/21697893?v=3&s=400");
+    margin-top: 100px;
+    margin-left: 100px;
+}
+
+.testtt{
+    display: none;
+    position: absolute;
+    width:300px;
+    height:200px;
+    background-image: url("https://avatars2.githubusercontent.com/u/21697893?v=3&s=400");
+    margin-top: 200px;
+    margin-left: 350px;
+    z-index: 4;
+}
+
+.blurblur{
+    filter: blur(5px);
+}
+
+.ingredient-menu-overlay{
+    display: none;
+    position: absolute;
+    width:100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.65);
+    z-index: 3;
+    filter: brightness(15) opacity(75%);
+}
+
+.ingredient-content{
+    width:100px;
+    height:100px;
+    margin-top: 100px;
+    margin-left:100px;
+    background-color: rgba(255,255,255, 1);
+    filter: brightness(100%) opacity(100%);
+}

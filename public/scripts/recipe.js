@@ -19,21 +19,19 @@ function init_img(recipe) {
 function init_ingredients(recipe) {
     var tbl = document.getElementById('ingredient_table');
     // remove old recipe's ingredients
-    for (var i = tbl.rows.length - 1; i > 0; i--) {
+    for (var i = tbl.rows.length - 1; i > 0; i--)
         tbl.deleteRow(i);
-    }
+
     // add new recipe's ingredients
     for (var i = 0; i < recipe['ingredients'].length; i++) {
+        var ingr = recipe['ingredients'][i];
         row = tbl.insertRow(i + 1);
-        var ingredient = row.insertCell(0);
-        var quantity = row.insertCell(1);
-        var note = row.insertCell(2);
-        ingredient.innerHTML = recipe['ingredients'][i]['name'];
-        quantity.innerHTML = recipe['ingredients'][i]['quantity'] + ' ' + recipe['ingredients'][i]['metric'];
-        var note_text = recipe['ingredients'][i]['note']
-        if (note_text) {
-            note.innerHTML = note_text
-        }
+        var ingr_name = row.insertCell(0);
+        var ingr_qntt = row.insertCell(1);
+        var ingr_note = row.insertCell(2);
+        ingr_name.innerHTML = ingr["name"];
+        ingr_qntt.innerHTML = ingr["quantity"] + " " + ingr["metric"];
+        if (ingr['note']) ingr_note.innerHTML = ingr['note'];
     }
 }
 
@@ -43,12 +41,12 @@ function init_ingredients(recipe) {
  * @param {*} recipe recipe data
  */
 function init_direction(recipe) {
-    var direction = document.getElementById("direction");
+    var direction_div = document.getElementById("direction");
     //remove aold recipe's steps
     var steps = document.getElementById("steps");
-    if (steps) {
-        direction.removeChild(steps);
-    }
+    if (steps)
+        direction_div.removeChild(steps);
+
     // adding new recipe's steps
     var p = document.createElement('p');
     p.id = "steps";
@@ -59,5 +57,5 @@ function init_direction(recipe) {
         ol.appendChild(li);
     }
     p.appendChild(ol);
-    direction.appendChild(p);
+    direction_div.appendChild(p);
 }

@@ -18,6 +18,7 @@ function addIngredient() {
     var count_label = ('0' + (ingre_counter + 1)).slice(-2);
     count_label = "Ingredient #" + count_label;
     var div_id = "ingreTBDiv" + ingre_counter;
+    var dd = (<div></div>);
     var div = $(document.createElement('div'))
         .attr("id", div_id);
     var label = $(document.createElement('label'))
@@ -50,3 +51,8 @@ function removeIngredient() {
         $("#removeButton").prop("disabled", true);
     }
 };
+
+function subbbmit() {
+    console.log("test")
+    alert("aaa");
+}

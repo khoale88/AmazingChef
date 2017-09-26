@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+    <title>Amzing Chef</title>
+
+    <link rel="stylesheet" href="/styles/khoa.css">
+    <!-- <script src="/scripts/home.js" type="text/javascript"></script> -->
+    <script>
+        function blurblur(){
+            var x = document.getElementById("ingredient-menu-overlay");
+            var y = document.getElementById("test");
+            var z = document.getElementById("testtt");
+            // x.setAttribute("display", "none");
+            if(!x.style.display){
+                x.style.display = "block";
+                y.classList.add("blurblur");
+                z.style.display = "block";
+            } else{
+                x.style.display = "";
+                y.classList.remove("blurblur");
+                z.style.display = "";
+            }
+           
+        }
+    </script>
+</head>
+
+<body>
+    <div id="wrapper" class="wrapper">
+        <div id="page-header">
+
+        </div>
+        <div id=page-content>
+            <div id="left-panel" class="primary-bg">
+                <input type="button" value="toggle" onclick="blurblur()">
+            </div>
+            
+            <div id="recipe-container" class="flex-display">
+                <div id="ingredient-menu-overlay" class="ingredient-menu-overlay">
+                    <p>click here to return</p>
+                </div>
+                <div id="testtt" class="testtt"  width="300px" height="200px">
+                    <p>soidfjaosidjfosijdofisjdoifjsodijfosidjfoisjdfoisdofsijdf</p>
+                </div>
+                <!-- <div><input type="button" value="toggle" onclick="blurblur()"></div> -->
+                <div id="test" class="test" width="300px" height="200px"></div>
+
+            </div>
+        </div>
+        
+
+    </div>
+</body>
+
+</html>
