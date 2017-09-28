@@ -1,6 +1,10 @@
 # Mac OS X
 .DS_Store
 
+#Webstorm
+.idea
+.vscode
+
 # Node.js
 node_modules/
 <<<<<< HEAD

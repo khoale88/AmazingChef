@@ -19,24 +19,24 @@ app.use(express.static('public'));
 var fs = require('fs');
 
 // render home page
-app.get("/", function (req, res) {
+app.get("/", function(req, res) {
     res.render("home");
 })
 
 // api to search recipes based on ingredients
 app.get('/search_recipes',
-    function (req, res) {
+    function(req, res) {
         // getting form data (query in get request)
         var ingredients = req.query;
         // process form data
         var recipes = searching(ingredients)
-        // dynamically generating page with data
+            // dynamically generating page with data
         res.render("search", { recipes: recipes });
     }
 )
 
 app.get("/khoa",
-    function (req, res) {
+    function(req, res) {
         res.render("khoa", {});
     })
 
@@ -68,7 +68,7 @@ function searching(ingredients) {
 
 // listen and print out host port to inform developers
 var server = app.listen(3000,
-    function () {
+    function() {
         var host = server.address().address
         var port = server.address().port
         console.log("Example app listening at http://%s:%s", host, port)

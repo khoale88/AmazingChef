@@ -7,10 +7,12 @@
     <title>Amzing Chef</title>
 
     <link rel="stylesheet" href="/styles/mystyles1.css">
-    <script src="/scripts/home.js" type="text/javascript"></script>
+    <script src="/scripts/home.js" type="text/javascript">
+        $(document).ready(init);
+    </script>
 </head>
 
-<body ng-app="home" ng-controller="home" onload=init()>
+<body ng-app="home" ng-controller="home">
     <div id="page">
         <!-- logo includes welcome message and a home picture -->
         <div id="logo">

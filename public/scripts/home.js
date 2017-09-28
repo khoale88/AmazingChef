@@ -4,6 +4,8 @@ var ingre_counter = 0;
 // html validation pattern for ingredient input
 const ingre_validation = "^[a-zA-Z][a-zA-Z\s]+$";
 
+$(document).ready(init);
+
 function init() {
     // create addIngredient buttons 
     for (var i = 0; i < INGR_MIN_CNT; i++) {
@@ -18,7 +20,6 @@ function addIngredient() {
     var count_label = ('0' + (ingre_counter + 1)).slice(-2);
     count_label = "Ingredient #" + count_label;
     var div_id = "ingreTBDiv" + ingre_counter;
-    var dd = (<div></div>);
     var div = $(document.createElement('div'))
         .attr("id", div_id);
     var label = $(document.createElement('label'))
