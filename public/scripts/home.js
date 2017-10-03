@@ -9,7 +9,7 @@ $(document).ready(init);
 function init() {
     // create addIngredient buttons 
     for (var i = 0; i < INGR_MIN_CNT; i++) {
-        document.getElementById('addButton').click();
+        $('#addButton').click();
     }
 }
 
@@ -23,7 +23,7 @@ function addIngredient() {
     var div = $(document.createElement('div'))
         .attr("id", div_id);
     var label = $(document.createElement('label'))
-        .after().html(count_label)
+        .html(count_label)
         .appendTo(div);
     var tbox = $(document.createElement('input'))
         .attr("type", "text")

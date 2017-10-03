@@ -3,12 +3,12 @@
  * @param {*} recipe recipe data
  */
 function init_img(recipe) {
-    document.getElementById('recipe_name')
-        .innerHTML = recipe['recipe_name'].replace("_", " ");
+    $('#recipe_name')
+        .text = recipe['recipe_name'].replace("_", " ");
 
-    var img = document.getElementById('recipe_img');
-    img.setAttribute('src', recipe['image']['source']);
-    img.setAttribute('width', '300px');
+    $('#recipe_img')
+        .attr('src', recipe['image']['source'])
+        .attr('width', '300px');
 }
 
 /**

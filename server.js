@@ -20,7 +20,7 @@ var fs = require('fs');
 
 // render home page
 app.get("/", function(req, res) {
-    res.render("home");
+    res.render("home3");
 })
 
 // api to search recipes based on ingredients
@@ -29,9 +29,28 @@ app.get('/search_recipes',
         // getting form data (query in get request)
         var ingredients = req.query;
         // process form data
-        var recipes = searching(ingredients)
-            // dynamically generating page with data
-        res.render("search", { recipes: recipes });
+        var recipes = searching(ingredients);
+        // dynamically generating page with data
+        // res.render("search", { recipes: recipes });
+        res.render("search3", { recipes: recipes });
+
+    }
+)
+
+// api to search recipes based on ingredients
+app.get('/search',
+    function(req, res) {
+        // getting form data (query in get request)
+        var ingredients = req.query;
+        // process form data
+        var recipes = searching(ingredients);
+        for (let i in recipes) {
+            recipes[i].href = "/recipes/" + recipes[i].recipe_name + ".html";
+        }
+        // dynamically generating page with data
+        // res.render("search", { recipes: recipes });
+        res.send(recipes);
+
     }
 )
 
