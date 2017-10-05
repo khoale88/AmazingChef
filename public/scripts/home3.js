@@ -1,39 +1,36 @@
 // ingredient count minimum
-const INGR_MIN_CNT = 2
-var ingredients;
+const INGR_MIN_CNT = 2;
+let ingredients;
 
 $(init);
 
 function init() {
-    // create addIngredient buttons 
-    for (var i = 0; i < INGR_MIN_CNT; i++) {
-        $('#addButton').click();
-    }
     initIngredients();
 }
 
 function initIngredients(){
-    var request = new XMLHttpRequest();
+    let request = new XMLHttpRequest();
     request.open("GET", "/ingredients");
     request.onreadystatechange = function () {
         if(request.readyState==4 && request.status == 200) {
             ingredients = JSON.parse(request.responseText);
             initIngreMenu();
         }
-    }
+    };
     request.send(null);
     initIngreBar();
 }
 
 function initIngreMenu(){
-    for(var i in ingredients){
-        var ingre = ingredients[i];
+    for(let i in ingredients){
+        let ingre = ingredients[i];
         $("<div></div>").attr("id",ingre.name)
             .html(ingre.name)
             .addClass("ingreBut")
             .appendTo("#ingreMenu")
+            .addClass("rounded-div")
             .draggable({
-                scope: "ingre",
+                // scope: "ingre",
                 helper: "clone"
             });
     }
@@ -42,27 +39,27 @@ function initIngreMenu(){
 function initIngreBar(){
     $("#ingreBar").droppable({
         activeClass: "ui-state-highlight",
-        scope: "ingre",
-        over: function(event, ui){
+        // scope: "ingre",
+        over: function (event, ui) {
             if(!$(this).find("#" + ui.draggable.attr("id")).length)
                 ui.draggable.appendTo(this);
         },
-        out: function(event, ui){
+        out: function (event, ui) {
             ui.draggable.appendTo("#ingreMenu");
         }
     });
 }
 
 function searches3(){
-    var ingres = $("#ingreBar").find(".ingreBut");
+    let ingres = $("#ingreBar").find(".ingreBut");
     if(ingres.length < INGR_MIN_CNT){
-        alert(INGR_MIN_CNT + " minimum");
+        alert(`minimum ${INGR_MIN_CNT} ingredients are required`);
         return
     }
-    var params = [];
-    ingres.each(function(){params.push($(this).attr("id"))})
-    var request = new XMLHttpRequest();
-    request.open("GET", "/search?ingredients=" + JSON.stringify(params));
+    let params = [];
+    $.each(ingres, i => {params.push($(ingres[i]).attr("id"))});
+    let request = new XMLHttpRequest();
+    request.open("GET", `/search?ingredients=${JSON.stringify(params)}`);
     request.onreadystatechange = loadRecipes;
     request.send(null);
 }
@@ -73,31 +70,28 @@ function searches3(){
  */
 function loadRecipes() {
     if (this.readyState == 4 && this.status == 200) {
-        var recipes = JSON.parse(this.responseText);
+        let recipes = JSON.parse(this.responseText);
         //reload
-        $("#searchResult").load("recipes/search_result.html",
-            //after load
-            function() {
-                //enable tab widget
-                $("#recipe_tabs").tabs();
-                // update message
-                $("#notification").html(recipes.length + " recipes have been found.");
-                // create recipe shortcut
-                for (var i = 0; i < recipes.length; i++) {
-                    var recipe = recipes[i];
-                    var img = $("<img>").attr("src", recipe.image.source);
-                    // AJAX tabs
-                    img = $("<a></a>").attr("href", recipe.href)
-                        .append(img);
-                    var div = $("<div></div>")
-                        .attr("id", recipe.recipe_name)
-                        .addClass("recipe-button")
-                        .append(img);
-                    findOrCreateDivWithClass("All", "recipeContainer").append(div);
-                    if (recipe.dietary.indexOf("vegetarian") >= 0)
-                        findOrCreateDivWithClass("Vegetarian", "recipeContainer").append(div.clone());
-                }
-            });
+        $("#searchResult").load("recipes/search_result.html", () => {
+            //enable tab widget
+            $("#recipe_tabs").tabs();
+            // update message
+            $("#notification").html(`${recipes.length} recipes have been found.`);
+            // create recipe shortcut
+            for (let i = 0; i < recipes.length; i++) {
+                let recipe = recipes[i];
+                let img = $("<img>").attr("src", recipe.image.source);
+                // AJAX tabs
+                img = $("<a></a>").attr("href", recipe.href)
+                    .append(img);
+                let div = $("<div></div>").attr("id", recipe.recipe_name)
+                    .addClass("recipe-button")
+                    .append(img);
+                findOrCreateDivWithClass("All", "recipeContainer").append(div);
+                if (recipe.dietary.indexOf("vegetarian") >= 0)
+                    findOrCreateDivWithClass("Vegetarian", "recipeContainer").append(div.clone());
+            }
+        });
     }
 }
 
@@ -108,8 +102,8 @@ function loadRecipes() {
  * @returns {*}
  */
 function findOrCreateDivWithClass(parentId, className){
-    var container = $("#"+parentId).find("."+className);
+    let container = $(`#${parentId}`).find(`.${className}`);
     if (!container.length)
-        container = $("<div></div>").addClass(className).appendTo("#"+parentId);
+        container = $("<div></div>").addClass(className).appendTo(`#${parentId}`);
     return container;
 }

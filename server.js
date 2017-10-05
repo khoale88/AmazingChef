@@ -16,51 +16,38 @@ app.use(express.static('public'));
 // var urlencodedParser = bodyParser.urlencoded({ extended: false })
 
 // Configure file system package to read file (replacement of database)
-var fs = require('fs');
+let fs = require('fs');
 
 // render home page
-app.get("/", function(req, res) {
-    res.render("home3");
-})
+app.get("/", (req, res) => {res.render("home3")});
 
 // api to search recipes based on ingredients
-app.get('/search_recipes',
-    function(req, res) {
-        // getting form data (query in get request)
-        var ingredients = req.query;
-        // process form data
-        var recipes = searching(ingredients);
-        // dynamically generating page with data
-        res.render("search3", { recipes: recipes });
-
-    }
-)
+app.get('/search_recipes', (req, res) => {
+    // getting form data (query in get request)
+    let ingredients = req.query;
+    // process form data
+    let recipes = searching(ingredients);
+    // dynamically generating page with data
+    res.render("search3", { recipes: recipes });
+});
 
 // api to search recipes based on ingredients
-app.get('/search',
-    function(req, res) {
-        // getting form data (query in get request)
-        var ingredients = JSON.parse(req.query.ingredients);
-        // process form data
-        var recipes = searching(ingredients);
-        recipes.forEach(function(recipe){recipe.href = "/recipes/" + recipe.recipe_name + ".html"});
-        // dynamically generating page with data
-        res.send(recipes);
+app.get('/search', (req, res) => {
+    // getting form data (query in get request)
+    let ingredients = JSON.parse(req.query.ingredients);
+    // process form data
+    let recipes = searching(ingredients);
+    recipes.forEach(function(recipe){recipe.href = `/recipes/${recipe.recipe_name}.html`});
+    // dynamically generating page with data
+    res.send(recipes);
+});
 
-    }
-)
+app.get("/ingredients", (req, res) => {
+    let ingredients = JSON.parse(fs.readFileSync(__dirname + "/recipes/ingredient.json"));
+    res.send(ingredients);
+});
 
-app.get("/ingredients",
-    function(req, res){
-        var ingredients = JSON.parse(fs.readFileSync(__dirname + "/recipes/" + "ingredient.json"));
-        res.send(ingredients);
-    }
-)
-
-app.get("/khoa",
-    function(req, res) {
-        res.render("khoa", {});
-    })
+app.get("/khoa", (req, res) => {res.render("khoa", {})});
 
 /**
  * helper function to search recipes based on ingredients
@@ -72,15 +59,15 @@ app.get("/khoa",
  * 
  */
 function searching(ingredients) {
-    var recipes = [];
-    for (var i in ingredients) {
+    let recipes = [];
+    for (let i in ingredients) {
         if (ingredients[i] === "egg") {
-            var recipe = JSON.parse(fs.readFileSync(__dirname + "/recipes/" + "omlette.json", 'utf8'));
+            let recipe = JSON.parse(fs.readFileSync(__dirname + "/recipes/omlette.json", 'utf8'));
             recipes.push(recipe);
             continue;
         }
         if (ingredients[i] === "potato") {
-            var recipe = JSON.parse(fs.readFileSync(__dirname + "/recipes/" + "potato_curry.json", 'utf8'));
+            let recipe = JSON.parse(fs.readFileSync(__dirname + "/recipes/potato_curry.json", 'utf8'));
             recipes.push(recipe);
             continue;
         }
@@ -89,10 +76,10 @@ function searching(ingredients) {
 }
 
 // listen and print out host port to inform developers
-var server = app.listen(3000,
-    function() {
-        var host = server.address().address
-        var port = server.address().port
-        console.log("Example app listening at http://%s:%s", host, port)
+let server = app.listen(3000,
+    () => {
+        let host = server.address().address;
+        let port = server.address().port;
+        console.log("Example app listening at http://%s:%s", host, port);
     }
-)
+);

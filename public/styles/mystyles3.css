@@ -28,6 +28,11 @@ body {
     padding-right: 10px;
 }
 
+#logo img{
+    margin: auto;
+    display: block;
+}
+
 .recipeContainer {
     /*display recipes side by side*/
     display: flex;
@@ -78,8 +83,6 @@ body {
 .recipe-button {
     padding-left: 10px;
     padding-right: 10px;
-    /*width: 200px;*/
-    /*height: 150px;*/
     text-align: center;
     border-radius: 100px !important;
     margin: 10px;
@@ -97,25 +100,19 @@ body {
 }
 
 .ingreBut{
-    height: 50px;
+    height: 25px;
     width: 50px;
-    /*padding: 30px;*/
-    text-align: center;
-    vertical-align: center;
-    border-style: solid;
-    border-width: 3px;
-    border-color: black;
-    background-color: #3E81B9;
+    text-align: center ;
+    vertical-align: middle;
+    margin:10px;
+    background-color: #c39597;
 }
 
 .ingreBar{
-    min-height: 70px;
-    width: 100%;
+    min-height: 55px;
     text-align: center;
-    vertical-align: center;
-    border-style: solid;
-    border-width: 3px;
-    border-color: black;
-    margin-bottom: 10px;
+    vertical-align: middle;
+    margin: 10px;
+    padding: 5px;
     display: flex;
 }
