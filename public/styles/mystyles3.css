@@ -1,0 +1,163 @@
+h1,
+h2 {
+    text-align: center;
+    color: darkorange;
+}
+
+
+/* setup to allow borders always fill out the length of page */
+
+html,
+body {
+    min-height: 100%;
+    height: 100%;
+    margin: auto;
+    background-color: lightyellow;
+}
+
+
+/* validation background color */
+
+input:invalid {
+    background-color: #FBCCCC;
+    /* background-color: rgba(255, 0, 0, .3); */
+}
+
+
+/* validation required border */
+
+input:required {
+    border: 1px solid blue;
+}
+
+fieldset {
+    width: 16em;
+    box-shadow: 5px 5px 5px gray;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 1em;
+    margin-bottom: 1em;
+}
+
+.centerButtons {
+    width: 21.5em;
+    margin-top: 1em;
+    margin-bottom: 1em;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#TextBoxesGroup input:valid {
+    color: #026102;
+}
+
+#TextBoxesGroup input[type=text] {
+    margin-left: 5px;
+    padding-left: 3px;
+    padding-right: 3px;
+}
+
+#page {
+    width: 750px;
+    border-left: 5px solid #F3F3D0;
+    border-right: 5px solid #F3F3D0;
+    /*border length should fill the page*/
+    min-height: 100%;
+    margin: auto;
+    padding-top: .1em;
+    padding-bottom: .1px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.recipeContainer {
+    /*display recipes side by side*/
+    display: flex;
+    flex-wrap: wrap;
+}
+
+#recipeContainer {
+    /*display recipes side by side*/
+    display: flex;
+}
+
+#recipeContainer img {
+    height: 150px;
+}
+
+#recipeDisplay {
+    padding: 1em;
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+#recipeDisplay h2 {
+    text-transform: capitalize;
+}
+
+#recipeContent {
+    width: 600px;
+    margin: 0 auto;
+}
+
+#notification {
+    background-color: #F3F3D0;
+    border-radius: 15px;
+    color: darkorange;
+}
+
+#logo img {
+    border-radius: 10%;
+}
+
+.rounded-div {
+    border: 5px solid #F3F3D0;
+    border-radius: 10px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.recipe-button {
+    padding-left: 10px;
+    padding-right: 10px;
+    /*width: 200px;*/
+    /*height: 150px;*/
+    text-align: center;
+    border-radius: 100px !important;
+    margin: 10px;
+    background-size: cover;
+}
+
+.recipe-button:hover {
+    background-color: #CFCFAC;
+}
+
+.recipe-button img {
+    height: 150px;
+    width: 200px;
+    border-radius: 50% !important;
+}
+
+.ingreBut{
+    height: 50px;
+    width: 50px;
+    /*padding: 30px;*/
+    text-align: center;
+    vertical-align: center;
+    border-style: solid;
+    border-width: 3px;
+    border-color: black;
+    background-color: #3E81B9;
+}
+
+.ingreBar{
+    min-height: 70px;
+    width: 100%;
+    text-align: center;
+    vertical-align: center;
+    border-style: solid;
+    border-width: 3px;
+    border-color: black;
+    margin-bottom: 10px;
+    display: flex;
+}
