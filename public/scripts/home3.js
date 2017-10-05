@@ -3,6 +3,7 @@ const INGR_MIN_CNT = 2
 var ingre_counter = 0;
 // html validation pattern for ingredient input
 const ingre_validation = "^[a-zA-Z][a-zA-Z\s]+$";
+var ingredients;
 
 $(init);
 
@@ -11,6 +12,7 @@ function init() {
     for (var i = 0; i < INGR_MIN_CNT; i++) {
         $('#addButton').click();
     }
+    initIngredients();
 }
 
 /**
@@ -26,6 +28,9 @@ function addIngredient() {
         .attr("placeholder", "ingredient")
         .attr("pattern", ingre_validation)
         .attr("required", "");
+
+    defaultIngredients(tbox);
+
     var div = $("<div></div>")
         .attr("id", "ingreTBDiv" + ingre_counter)
         .append(label)
@@ -39,6 +44,17 @@ function addIngredient() {
 };
 
 /**
+ * helper function to set default values for ingredient boxes
+ * @param box
+ */
+function defaultIngredients(box){
+    if(!(ingre_counter % 2))
+        box.val("egg");
+    else
+        box.val("potato");
+}
+
+/**
  * remove the last ingredient input box
  */
 function removeIngredient() {
@@ -48,7 +64,17 @@ function removeIngredient() {
     if (ingre_counter == INGR_MIN_CNT) {
         $("#removeButton").prop("disabled", true);
     }
-};
+}
+
+function initIngredients(){
+    var request = new XMLHttpRequest();
+    request.open("GET", "/ingredients");
+    request.onreadystatechange = function () {
+        if(request.readyState==4 && request.status == 200)
+            ingredients = JSON.parse(request.responseText);
+    }
+    request.send(null);
+}
 
 /**
  * validation and send ajax request
@@ -61,7 +87,7 @@ function searches() {
     }
 
     var params = $("#ingreForm").serialize();
-    request = new XMLHttpRequest();
+    var request = new XMLHttpRequest();
     request.open("GET", "/search?" + params);
     request.onreadystatechange = loadRecipes;
     request.send(null);
@@ -71,8 +97,8 @@ function searches() {
  * display recipes when request is ready
  */
 function loadRecipes() {
-    if (request.readyState == 4 && request.status == 200) {
-        var recipes = JSON.parse(request.responseText);
+    if (this.readyState == 4 && this.status == 200) {
+        var recipes = JSON.parse(this.responseText);
         //reload
         $("#searchResult").load("recipes/search_result.html",
             //after load
@@ -93,11 +119,25 @@ function loadRecipes() {
                     var div = $("<div></div>")
                         .attr("id", recipe.recipe_name)
                         .addClass("recipe-button")
+                        // .css("background-image","url("+recipe.image.source+")");
                         .append(img);
-                    $("#All").append(div);
+                    findOrCreateDivWithClass("All", "recipeContainer").append(div);
                     if (recipe.dietary.indexOf("vegetarian") >= 0)
-                        $("#Vegetarian").append(div.clone());
+                        findOrCreateDivWithClass("Vegetarian", "recipeContainer").append(div.clone());
                 }
             });
     }
+}
+
+/**
+ *
+ * @param parentId
+ * @param className
+ * @returns {*}
+ */
+function findOrCreateDivWithClass(parentId, className){
+    var container = $("#"+parentId).find("."+className);
+    if (!container.length)
+        container = $("<div></div>").addClass(className).appendTo("#"+parentId);
+    return container;
 }

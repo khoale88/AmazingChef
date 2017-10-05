@@ -44,13 +44,20 @@ app.get('/search',
         var ingredients = req.query;
         // process form data
         var recipes = searching(ingredients);
-        for (let i in recipes) {
+        for (var i in recipes) {
             recipes[i].href = "/recipes/" + recipes[i].recipe_name + ".html";
         }
         // dynamically generating page with data
         // res.render("search", { recipes: recipes });
         res.send(recipes);
 
+    }
+)
+
+app.get("/ingredients",
+    function(req, res){
+        var ingredients = JSON.parse(fs.readFileSync(__dirname + "/recipes/" + "ingredient.json"));
+        res.send(ingredients);
     }
 )
 
