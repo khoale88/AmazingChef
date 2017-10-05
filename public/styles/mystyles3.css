@@ -15,48 +15,6 @@ body {
     background-color: lightyellow;
 }
 
-
-/* validation background color */
-
-input:invalid {
-    background-color: #FBCCCC;
-    /* background-color: rgba(255, 0, 0, .3); */
-}
-
-
-/* validation required border */
-
-input:required {
-    border: 1px solid blue;
-}
-
-fieldset {
-    width: 16em;
-    box-shadow: 5px 5px 5px gray;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 1em;
-    margin-bottom: 1em;
-}
-
-.centerButtons {
-    width: 21.5em;
-    margin-top: 1em;
-    margin-bottom: 1em;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-#TextBoxesGroup input:valid {
-    color: #026102;
-}
-
-#TextBoxesGroup input[type=text] {
-    margin-left: 5px;
-    padding-left: 3px;
-    padding-right: 3px;
-}
-
 #page {
     width: 750px;
     border-left: 5px solid #F3F3D0;

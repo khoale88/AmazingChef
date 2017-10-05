@@ -31,7 +31,6 @@ app.get('/search_recipes',
         // process form data
         var recipes = searching(ingredients);
         // dynamically generating page with data
-        // res.render("search", { recipes: recipes });
         res.render("search3", { recipes: recipes });
 
     }
@@ -41,14 +40,11 @@ app.get('/search_recipes',
 app.get('/search',
     function(req, res) {
         // getting form data (query in get request)
-        var ingredients = req.query;
+        var ingredients = JSON.parse(req.query.ingredients);
         // process form data
         var recipes = searching(ingredients);
-        for (var i in recipes) {
-            recipes[i].href = "/recipes/" + recipes[i].recipe_name + ".html";
-        }
+        recipes.forEach(function(recipe){recipe.href = "/recipes/" + recipe.recipe_name + ".html"});
         // dynamically generating page with data
-        // res.render("search", { recipes: recipes });
         res.send(recipes);
 
     }
