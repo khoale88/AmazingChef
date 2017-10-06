@@ -1,51 +1,64 @@
 // ingredient count minimum
 const INGR_MIN_CNT = 2;
-let ingredients;
+let ingredients; //ingredients = [egg, potato]
 
 $(init);
 
 function init() {
     initIngredients();
+
 }
 
 function initIngredients(){
     let request = new XMLHttpRequest();
     request.open("GET", "/ingredients");
     request.onreadystatechange = function () {
-        if(request.readyState==4 && request.status == 200) {
+        if(request.readyState==4 && request.status == 200)
             ingredients = JSON.parse(request.responseText);
-            initIngreMenu();
-        }
+        initIngreMenu();
+
     };
     request.send(null);
     initIngreBar();
 }
 
 function initIngreMenu(){
-    for(let i in ingredients){
-        let ingre = ingredients[i];
-        $("<div></div>").attr("id",ingre.name)
-            .html(ingre.name)
-            .addClass("ingreBut")
-            .appendTo("#ingreMenu")
-            .addClass("rounded-div")
-            .draggable({
-                // scope: "ingre",
-                helper: "clone"
-            });
+    for(let catId in ingredients){
+        let category = ingredients[catId];
+        $("<h3></h3>").html(catId).appendTo("#ingreMenu");
+        let div = $("<div></div>").appendTo("#ingreMenu");
+        div = $("<div></div>").css("display","flex").attr("id",catId).addClass("ingreBar rounded-div").appendTo(div);
+        for(let i in category) {
+            let ingre = category[i];
+            $("<div></div>").attr("id", `${catId}--${ingre.name}`)
+                .html(ingre.name)
+                .addClass("ingreBut")
+                .appendTo(`#${catId}`)
+                .addClass("rounded-div")
+                .draggable({
+                    scope: "ingre",
+                    helper: "clone"
+                });
+        }
     }
+    $("#ingreMenu").accordion();
+    // $("#accordion").accordion();
 }
 
 function initIngreBar(){
     $("#ingreBar").droppable({
         activeClass: "ui-state-highlight",
-        // scope: "ingre",
+        scope: "ingre",
         over: function (event, ui) {
+            console.log(ui.draggable);
             if(!$(this).find("#" + ui.draggable.attr("id")).length)
                 ui.draggable.appendTo(this);
         },
         out: function (event, ui) {
-            ui.draggable.appendTo("#ingreMenu");
+            let catId = ui.draggable.attr("id");
+            console.log(catId);
+            catId = catId.slice(0, catId.indexOf("--"));
+            ui.draggable.appendTo(`#${catId}`);
         }
     });
 }

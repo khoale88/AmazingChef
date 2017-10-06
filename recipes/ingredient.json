@@ -1,10 +1,19 @@
-[
-  {
+{ "categoryA":
+  [{
     "name":"egg",
     "image":""
-  },
-  {
+    },
+    {
     "name":"potato",
     "image":""
-  }
-]
+    }],
+  "categoryB":[
+    {
+      "name":"beef",
+      "image":""
+    },
+    {
+      "name":"pork",
+      "image":""
+    }]
+}

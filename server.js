@@ -19,7 +19,7 @@ app.use(express.static('public'));
 let fs = require('fs');
 
 // render home page
-app.get("/", (req, res) => {res.render("home3")});
+app.get("/", (req, res) => res.render("home3"));
 
 // api to search recipes based on ingredients
 app.get('/search_recipes', (req, res) => {
@@ -47,7 +47,7 @@ app.get("/ingredients", (req, res) => {
     res.send(ingredients);
 });
 
-app.get("/khoa", (req, res) => {res.render("khoa", {})});
+app.get("/khoa", (req, res) => res.render("khoa", {}));
 
 /**
  * helper function to search recipes based on ingredients
