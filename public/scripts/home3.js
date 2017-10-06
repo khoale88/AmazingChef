@@ -41,8 +41,7 @@ function initIngreMenu(){
                 });
         }
     }
-    $("#ingreMenu").accordion();
-    // $("#accordion").accordion();
+    setTimeout(() => $("#ingreMenu").accordion(), 1);
 }
 
 function initIngreBar(){
@@ -50,13 +49,11 @@ function initIngreBar(){
         activeClass: "ui-state-highlight",
         scope: "ingre",
         over: function (event, ui) {
-            console.log(ui.draggable);
             if(!$(this).find("#" + ui.draggable.attr("id")).length)
                 ui.draggable.appendTo(this);
         },
         out: function (event, ui) {
             let catId = ui.draggable.attr("id");
-            console.log(catId);
             catId = catId.slice(0, catId.indexOf("--"));
             ui.draggable.appendTo(`#${catId}`);
         }
@@ -70,7 +67,7 @@ function searches3(){
         return
     }
     let params = [];
-    $.each(ingres, i => {params.push($(ingres[i]).attr("id"))});
+    $.each(ingres, i => {params.push($(ingres[i]).html())});
     let request = new XMLHttpRequest();
     request.open("GET", `/search?ingredients=${JSON.stringify(params)}`);
     request.onreadystatechange = loadRecipes;
