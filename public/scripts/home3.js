@@ -4,7 +4,8 @@ let ingredients; //ingredients = [egg, potato]
 
 $(init);
 
-function init() {
+function init() {        
+    $('#dialog').hide() 
     initIngredients();
 
 }
@@ -67,7 +68,12 @@ function initIngreBar(){
 function searches3(){
     let ingres = $("#ingreBar").find(".ingreBut");
     if(ingres.length < INGR_MIN_CNT){
-        alert(`minimum ${INGR_MIN_CNT} ingredients are required`);
+        //alert(`minimum ${INGR_MIN_CNT} ingredients are required`);
+        $('#dialog').show()
+        $( "#dialog" ).dialog({
+          dialogClass:  "alert"
+        });
+        $('#dialog').hide()
         return
     }
     let params = [];
