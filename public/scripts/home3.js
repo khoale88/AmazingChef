@@ -45,18 +45,22 @@ function initIngreMenu(){
 }
 
 function initIngreBar(){
-    $("#ingreBar").droppable({
-        activeClass: "ui-state-highlight",
-        scope: "ingre",
-        over: function (event, ui) {
-            if(!$(this).find("#" + ui.draggable.attr("id")).length)
-                ui.draggable.appendTo(this);
-        },
-        out: function (event, ui) {
-            let catId = ui.draggable.attr("id");
-            catId = catId.slice(0, catId.indexOf("--"));
-            ui.draggable.appendTo(`#${catId}`);
-        }
+    $("#ingreBar").resizable({
+            containment: "parent",
+            minWidth: 270
+            })        
+            .droppable({
+            activeClass: "ui-state-highlight",
+            scope: "ingre",
+            over: function (event, ui) {
+                if(!$(this).find("#" + ui.draggable.attr("id")).length)
+                    ui.draggable.appendTo(this);
+            },
+            out: function (event, ui) {
+                let catId = ui.draggable.attr("id");
+                catId = catId.slice(0, catId.indexOf("--"));
+                ui.draggable.appendTo(`#${catId}`);
+            }
     });
 }
 
@@ -101,7 +105,8 @@ function loadRecipes() {
                 if (recipe.dietary.indexOf("vegetarian") >= 0)
                     findOrCreateDivWithClass("Vegetarian", "recipeContainer").append(div.clone());
             }
-        });
+        })
+        .effect("slide");
     }
 }
 
