@@ -70,6 +70,7 @@ function searches3(){
     if(ingres.length < INGR_MIN_CNT){
         //alert(`minimum ${INGR_MIN_CNT} ingredients are required`);
         $('#dialog').show()
+        $( "#dialog" ).effect( "shake" );
         $( "#dialog" ).dialog({
           dialogClass:  "alert"
         });
