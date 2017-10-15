@@ -69,9 +69,7 @@ function searches3(){
     let ingres = $("#ingreBar").find(".ingreBut");
     if(ingres.length < INGR_MIN_CNT){
         //alert(`minimum ${INGR_MIN_CNT} ingredients are required`);
-        $('#dialog').show()
-        $( "#dialog" ).effect( "shake" );
-        $( "#dialog" ).dialog({
+        $('#dialog').show().effect( "shake" ).dialog({
           dialogClass:  "alert"
         });
         $('#dialog').hide()
