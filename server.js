@@ -1,6 +1,7 @@
 // Create a new Express application.
 var express = require('express');
 var app = express();
+var mongo = require('mongodb');
 
 // Configure view engine to render EJS templates.
 app.set('views', __dirname + '/views');
@@ -8,6 +9,21 @@ app.set('view engine', 'ejs');
 
 // Configure static folder
 app.use(express.static('public'));
+
+var MongoClient = require('mongodb').MongoClient;
+//Create a database named "mydb":
+var url = "mongodb://localhost:27017/recipes";
+
+MongoClient.connect(url, function(err, db) {
+    if (err) throw err;
+    var myobj = { name: "Company Inc", address: "Highway 37" };
+    db.collection("recipelist").insertOne(myobj, function(err, res) {
+        if (err) throw err;
+        console.log("1 document inserted");
+        db.close();
+    });
+});
+
 
 // Use application-level middleware for common functionality, including parsing, etc.
 // app.use(require('body-parser').urlencoded({ extended: true }));
