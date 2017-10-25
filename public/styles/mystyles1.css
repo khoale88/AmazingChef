@@ -70,6 +70,8 @@ fieldset {
     padding-right: 10px;
 }
 
+
+
 .recipeContainer {
     /*display recipes side by side*/
     display: flex;

@@ -83,6 +83,9 @@ function searches3(){
     request.send(null);
 }
 
+function addRecipe(){
+    var ingres = $(".addrecipe");
+}
 
 /**
  * display recipes when request is ready
