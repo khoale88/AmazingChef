@@ -17,15 +17,20 @@
         "url": "https://github.com/khoale88/AmazingChef/issues"
     },
     "dependencies": {
-        "body-parser": "^1.18.1",
+        "body-parser": "^1.18.2",
+        "chai": "^4.1.2",
         "cookie-parser": "^1.4.3",
         "ejs": "^2.5.7",
-        "express": "^4.15.4",
-        "express-session": "^1.15.5",
+        "express": "^4.16.2",
+        "express-session": "^1.15.6",
         "html": "^1.0.0",
+        "mocha": "^4.0.1",
         "mongodb": "^2.2.33",
-        "morgan": "^1.8.2",
+        "monk": "^6.0.5",
+        "morgan": "^1.9.0",
         "passport": "^0.4.0",
-        "passport-local": "^1.0.0"
+        "passport-local": "^1.0.0",
+        "request": "^2.83.0",
+        "should": "^13.1.2"
     }
 }
