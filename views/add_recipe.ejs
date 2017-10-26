@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+    <title>Amzing Chef</title>
+
+    <link rel="stylesheet" href="/styles/mystyles1.css">
+    <script src="/scripts/add_recipe.js" type="text/javascript"></script>
+</head>
+
+<body ng-app="home" ng-controller="home">
+<div id="page">
+    <button onclick="document.location.href='/'">Home</button>
+    <button onclick="document.location.reload()">Reload</button>
+    <!-- logo includes welcome message and a home picture -->
+    <div id="logo">
+        <a id="welcome-message" href="/" style="text-decoration:none">
+            <h1>ADD A RECIPE</h1>
+        </a>
+    </div>
+
+    <!-- ingreForm will submit fromdata via a get request to server when submit button is clicked -->
+    <form id="recipeForm" action="add_recipe" method="post" class="ingredientInput">
+
+        <fieldset>
+            <legend align="center"><b>BASIC INFO</b></legend>
+
+            <div id="recipe_info">
+                <div id="recipe_name">
+                    <label>recipe name</label>
+                    <input type="text" name="recipe_name" class="recipe_name" placeholder="recipe name">
+                </div>
+                <div id="image_url">
+                    <label>image url</label>
+                    <input type="text" name="image_url" class="image_url" placeholder="image url">
+                </div>
+                <div id="cruisine_type">
+                    <label>cruisine type</label>
+                    <input type="text" name="cruisine_type" class="cruisine_type" placeholder="separated by comma">
+                </div>
+                <div id="meal_type">
+                    <label>meal type</label>
+                    <input type="text" name="meal_type" class="meal_type" placeholder="separated by comma">
+                </div>
+                <div id="dietary">
+                    <label>dietary</label>
+                    <input type="text" name="dietary" class="dietary" placeholder="separated by comma">
+                </div>
+                <div id="cook_time">
+                    <label>cook time</label>
+                    <input type="number" name="cook_time" class="cook_time" value="10">
+                </div>
+            </div>
+
+        </fieldset>
+
+        <fieldset>
+            <legend align="center"><b>INGREDIENTS</b></legend>
+
+            <div id="ingr-group">
+            </div>
+            <div id="ingreButtonGroup" class="centerButtons">
+                <input type="button" value="Add Ingredient" id="add-ingr" onclick=addIngredient()>
+            </div>
+        </fieldset>
+
+        <fieldset>
+            <legend align="center"><b>DIRECTION</b></legend>
+
+            <div id="inst-group">
+            </div>
+            <div id="instButtonGroup" class="centerButtons">
+                <input type="button" value="Add Instruction" id="add-inst" onclick=addInstruction()>
+            </div>
+        </fieldset>
+
+        <div id="sm" class="centerButtons">
+            <input type="button" value="Submit" id="add-recipe" onclick=submitRecipe()>
+        </div>
+
+    </form>
+
+
+</div>
+
+</body>
+
+</html>

@@ -15,63 +15,63 @@ db.then(() => {
 
 const collection = db.get('recipelist')
 //for inserting documents
-collection.insert([{a: 2}, {a: 21}, {a: 31}])
-    .then((docs) => {
-    // docs contains the documents inserted with added **_id** fields
-    // Inserted 3 documents into the document collection
-}).catch((err) => {
-    // An error happened while inserting
-}).then(() => db.close())
-
-
-//for updating documents
-collection.insert([{a: 1}, {a: 2}, {a: 3}])
-    .then((docs) => {
-    // Inserted 3 documents into the document collection
-})
-.then(() => {
-
-    return collection.update({ a: 2 }, { $set: { b: 1 } })
-
-})
-.then((result) => {
-    // Updated the document with the field a equal to 2
-})
-.then(() => db.close())
-
-//delete a document
-collection.insert([{a: 31}, {a: 32}, {a: 33}])
-    .then((docs) => {
-    // Inserted 3 documents into the document collection
-})
-.then(() => collection.update({ a: 2 }, { $set: { b: 1 } }))
-.then((result) => {
-    // Updated the document with the field a equal to 2
-})
-.then(() => {
-
-    return collection.remove({ a: 31})
-
-}).then((result) => {
-    // Deleted the document with the field a equal to 3
-})
-.then(() => db.close())
-
-
-//For finding all documents
-
-
-
-.then(() => {
-    console.log(collection.find())
-    return collection.find()
-
-
-})
-.then((docs) => {
-    // docs === [{ a: 1 }, { a: 2, b: 1 }]
-})
-.then(() => db.close())
+// collection.insert([{a: 2}, {a: 21}, {a: 31}])
+//     .then((docs) => {
+//     // docs contains the documents inserted with added **_id** fields
+//     // Inserted 3 documents into the document collection
+// }).catch((err) => {
+//     // An error happened while inserting
+// }).then(() => db.close())
+//
+//
+// //for updating documents
+// collection.insert([{a: 1}, {a: 2}, {a: 3}])
+//     .then((docs) => {
+//     // Inserted 3 documents into the document collection
+// })
+// .then(() => {
+//
+//     return collection.update({ a: 2 }, { $set: { b: 1 } })
+//
+// })
+// .then((result) => {
+//     // Updated the document with the field a equal to 2
+// })
+// .then(() => db.close())
+//
+// //delete a document
+// collection.insert([{a: 31}, {a: 32}, {a: 33}])
+//     .then((docs) => {
+//     // Inserted 3 documents into the document collection
+// })
+// .then(() => collection.update({ a: 2 }, { $set: { b: 1 } }))
+// .then((result) => {
+//     // Updated the document with the field a equal to 2
+// })
+// .then(() => {
+//
+//     return collection.remove({ a: 31})
+//
+// }).then((result) => {
+//     // Deleted the document with the field a equal to 3
+// })
+// .then(() => db.close())
+//
+//
+// //For finding all documents
+//
+//
+//
+// .then(() => {
+//     console.log(collection.find())
+//     return collection.find()
+//
+//
+// })
+// .then((docs) => {
+//     // docs === [{ a: 1 }, { a: 2, b: 1 }]
+// })
+// .then(() => db.close())
 
 
 
@@ -101,25 +101,18 @@ var MongoClient = require('mongodb').MongoClient;
 
 // Use application-level middleware for common functionality, including parsing, etc.
 // app.use(require('body-parser').urlencoded({ extended: true }));
-// var bodyParser = require('body-parser');
+app.use(require('body-parser').json());
+// let bodyParser = require('body-parser');
 // Create application/x-www-form-urlencoded parser
-// var urlencodedParser = bodyParser.urlencoded({ extended: false })
+// let urlencodedParser = bodyParser.urlencoded({ extended: false });
+// let jsonParser = bodyParser.json();
+
 
 // Configure file system package to read file (replacement of database)
 let fs = require('fs');
 
 // render home page
-app.get("/", (req, res) => res.render("home3"));
-
-// api to search recipes based on ingredients
-app.get('/search_recipes', (req, res) => {
-    // getting form data (query in get request)
-    let ingredients = req.query;
-    // process form data
-    let recipes = searching(ingredients);
-    // dynamically generating page with data
-    res.render("search3", { recipes: recipes });
-});
+app.get("/", (req, res) => res.render("home4"));
 
 // api to search recipes based on ingredients
 app.get('/search', (req, res) => {
@@ -130,6 +123,15 @@ app.get('/search', (req, res) => {
     recipes.forEach(function(recipe){recipe.href = `/recipes/${recipe.recipe_name}.html`});
     // dynamically generating page with data
     res.send(recipes);
+});
+
+app.get('/add_recipe', (req, res) => {
+   res.render('add_recipe', {});
+});
+
+app.post('/add_recipe', (req, res) => {
+    console.log(req.body);
+    res.status(200).send(null);
 });
 
 app.get("/ingredients", (req, res) => {
