@@ -13,7 +13,7 @@
 <body ng-app="home" ng-controller="home">
 <div id="page">
     <button onclick="document.location.href='/'">Home</button>
-    <button onclick="document.location.reload()">Reload</button>
+
     <!-- logo includes welcome message and a home picture -->
     <div id="logo">
         <a id="welcome-message" href="/" style="text-decoration:none">
@@ -78,6 +78,7 @@
 
         <div id="sm" class="centerButtons">
             <input type="button" value="Submit" id="add-recipe" onclick=submitRecipe()>
+            <button onclick="$('#recipeForm')[0].reset()">Reset</button>
         </div>
 
     </form>

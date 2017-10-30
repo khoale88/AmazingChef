@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+    <title>Amzing Chef</title>
+
+    <link rel="stylesheet" href="/styles/mystyles1.css">
+    <script>
+        $(init);
+        function init(){
+          return;
+        };
+        function login(){
+            let formData = $("#login-form").serializeArray();
+            let data = {};
+            $(formData).each((index, item) => {
+                data[item.name] = item.value;
+            })
+            let request = new XMLHttpRequest();
+            request.open("POST", "/auth/login", true);
+            request.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+            request.onreadystatechange = function () {
+                if(request.readyState==4 && request.status == 200) {
+                    if(request.responseURL)
+                        window.location = request.responseURL;
+                } else if (request.readyState==4 && request.status == 401){
+                    alert('Wrong username and password! Please use this to login\n\n   username: admin\n   password: admin');
+                }
+            };
+            request.send(JSON.stringify(data));
+        }
+    </script>
+</head>
+
+<body ng-app="home" ng-controller="home">
+    <div id="page">
+        <!-- logo includes welcome message and a home picture -->
+        <div id="login">
+            <form id="login-form" action="" method="">
+                <input id="username" type="text" name="username" placeholder="username">
+                <input id="password" type="text" name="password" placeholder="password">
+                <input type="button" value="submit" onclick="login()">
+            </form>
+        </div>
+
+
+
+    </div>
+
+</body>
+
+</html>
