@@ -2,11 +2,10 @@ let express = require('express');
 let auth = express.Router();
 
 auth.get('/login', (req, res) => {
-    res.render('login');
+    res.render('auth/login');
 });
 auth.post('/login', (req, res) => {
-    // console.log(req.body);
-    body = req.body;
+    let body = req.body;
     if(body.username === 'admin' && body.password==='admin'){
         req.session.admin = true;
         req.session.login = true;
@@ -16,4 +15,5 @@ auth.post('/login', (req, res) => {
         res.sendStatus(401);
     }
 });
+
 module.exports = auth;

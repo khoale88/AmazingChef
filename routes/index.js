@@ -1,4 +1,3 @@
-
 let express = require('express');
 index = express.Router();
 // Configure file system package to read file (replacement of database)
@@ -11,18 +10,22 @@ index.get("/", (req, res) => res.render("home4"));
 index.get('/search', (req, res) => {
     // getting form data (query in get request)
     let ingredients = JSON.parse(req.query.ingredients);
+    let db = req.db;
     // process form data
-    let recipes = searching(ingredients);
-    recipes.forEach(function (recipe) {
-        recipe.href = `/recipes/${recipe.recipe_name}.html`
-    });
-    // dynamically generating page with data
-    res.send(recipes);
+    searching(db, ingredients)
+        .then(recipes => {
+            recipes.forEach(recipe => {
+                recipe.href = `/recipes/${recipe.recipe_name}.html`;
+            });
+            return recipes;
+        })
+        .then(recipes => res.send(recipes));
 });
 
-function isAdmin(req, res, next){
+function isAdmin(req, res, next) {
     let now = new Date().getTime() / 1000;
-    if (req.session.admin && now - req.session.logTime <= 60){
+    // session valid for 10 mins only
+    if (req.session.admin && now - req.session.logTime <= 600) {
         next();
     } else {
         res.redirect('/auth/login');
@@ -30,46 +33,44 @@ function isAdmin(req, res, next){
 }
 
 index.get('/add_recipe', isAdmin, (req, res) => {
-
     res.render('add_recipe', {})
 });
 
 index.post('/add_recipe', isAdmin, (req, res) => {
-    console.log(req.body);
-    res.status(204).send(null);
+    let recipe = req.body;
+    console.log(recipe);
+    let db = req.db;
+    let collection = db.get('recipes');
+    collection.insert(recipe)
+        .then(doc => {
+            res.status(201).send({success: true, recipe: doc})
+        })
+        .then(() => db.close);
+
 });
 
 index.get("/ingredients", (req, res) => {
-    let ingredients = JSON.parse(fs.readFileSync(__dirname + "/../recipes/ingredient.json"));
+    let ingredients = JSON.parse(fs.readFileSync("recipes/ingredient.json"));
     res.send(ingredients);
 });
 
 /**
  * helper function to search recipes based on ingredients
- * include omlette recipe data if ingrdients have egg
- * include potato_curry recipe data if ingredient have potato
+ * {'ingredients':{$elemMatch:{name:{$in:ingredients}}}}
  *
  * @param {*} ingredients list of ingredients
  * @return  array of recipes
  *
  */
-function searching(ingredients) {
-    let recipes = [];
-    for (let i in ingredients) {
-        if (ingredients[i] === "egg") {
-            let recipe = JSON.parse(fs.readFileSync(__dirname + "/../recipes/omlette.json", 'utf8'));
-            recipes.push(recipe);
-            continue;
-        }
-        if (ingredients[i] === "potato") {
-            let recipe = JSON.parse(fs.readFileSync(__dirname + "/../recipes/potato_curry.json", 'utf8'));
-            recipes.push(recipe);
-            continue;
-        }
-    }
-    return recipes;
+function searching(db, ingredients) {
+    let collection = db.get('recipes');
+    return collection.find({'ingredients':{$elemMatch:{name:{$in:ingredients}}}},{})
+        .then(docs => {
+            let recipes = docs;
+            db.close();
+            return recipes;
+        });
 }
-
 
 // export {index};
 module.exports = index;

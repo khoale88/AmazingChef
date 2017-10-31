@@ -54,7 +54,6 @@ function addIngredient() {
         .attr("name", "note-" + count_label)
         .attr("type", "text")
         .attr("placeholder", "note")
-        .attr("required", "")
         .addClass('ingr-note')
         .appendTo(div);
     if(ingre_counter >= INGR_MIN_CNT) {
@@ -119,8 +118,8 @@ function submitRecipe(){
     request.open("POST", "/add_recipe", true);
     request.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
     request.onreadystatechange = function () {
-        if(request.readyState==4 && request.status == 200)
-            console.log('done');
+        if(request.readyState==4 && request.status == 201)
+            console.log(JSON.parse(request.responseText));
     };
     request.send(JSON.stringify(data));
 };
