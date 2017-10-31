@@ -8,12 +8,19 @@ app.set('view engine', 'ejs');
 
 // Configure static folder
 app.use(express.static('public'));
-
+let fs = require('fs');
 //configure mongo db
 const monk = require("monk");
 const db = monk('localhost:27017/AMZC');
 db.then(() => {
-    console.log('Connected correctly to server')
+    // let files = ['omlette.json']
+    console.log('Connected correctly to server');
+    let collection = db.get('recipes');
+    collection.drop().then(() =>{
+        let omlette = JSON.parse(fs.readFileSync('recipes/omlette.json'));
+        collection.insert(omlette)
+            .then(()=> db.close());
+    })
 });
 
 // use mongodb middleware
