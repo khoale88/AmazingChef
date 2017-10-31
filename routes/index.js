@@ -22,33 +22,6 @@ index.get('/search', (req, res) => {
         .then(recipes => res.send(recipes));
 });
 
-function isAdmin(req, res, next) {
-    let now = new Date().getTime() / 1000;
-    // session valid for 10 mins only
-    if (req.session.admin && now - req.session.logTime <= 600) {
-        next();
-    } else {
-        res.redirect('/auth/login');
-    }
-}
-
-index.get('/add_recipe', isAdmin, (req, res) => {
-    res.render('add_recipe', {})
-});
-
-index.post('/add_recipe', isAdmin, (req, res) => {
-    let recipe = req.body;
-    console.log(recipe);
-    let db = req.db;
-    let collection = db.get('recipes');
-    collection.insert(recipe)
-        .then(doc => {
-            res.status(201).send({success: true, recipe: doc})
-        })
-        .then(() => db.close);
-
-});
-
 index.get("/ingredients", (req, res) => {
     let ingredients = JSON.parse(fs.readFileSync("recipes/ingredient.json"));
     res.send(ingredients);

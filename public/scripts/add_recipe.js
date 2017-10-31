@@ -115,11 +115,13 @@ function submitRecipe(){
         data[k] = d[k];
     }
     let request = new XMLHttpRequest();
-    request.open("POST", "/add_recipe", true);
+    request.open("POST", "/recipes", true);
     request.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
     request.onreadystatechange = function () {
-        if(request.readyState==4 && request.status == 201)
+        if(request.readyState==4 && request.status == 201) {
             console.log(JSON.parse(request.responseText));
+            $('#form-reset').click();
+        }
     };
     request.send(JSON.stringify(data));
 };

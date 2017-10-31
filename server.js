@@ -16,11 +16,14 @@ db.then(() => {
     // let files = ['omlette.json']
     console.log('Connected correctly to server');
     let collection = db.get('recipes');
-    collection.drop().then(() =>{
-        let omlette = JSON.parse(fs.readFileSync('recipes/omlette.json'));
-        collection.insert(omlette)
-            .then(()=> db.close());
-    })
+    collection.findOne({'recipe_name':'omlette'})
+        .then(doc => {
+            if(!doc){
+                let omlette = JSON.parse(fs.readFileSync('recipes/omlette.json'));
+                collection.insert(omlette)
+                    .then(()=> db.close());
+            }
+        });
 });
 
 // use mongodb middleware
@@ -42,7 +45,8 @@ app.use(cookieParser());
 // setup routes
 app.use('/', require('./routes/index'));
 app.use('/auth/', require('./routes/auth'));
-app.use('/khoa', require('./routes/khoa'));
+app.use('/khoa/', require('./routes/khoa'));
+app.use('/recipes/', require('./routes/recipes'));
 
 // listen and print out host port to inform developers
 app.listen(3000);
