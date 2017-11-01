@@ -18,7 +18,6 @@ function initIngredients() {
         if (request.readyState == 4 && request.status == 200)
             ingredients = JSON.parse(request.responseText);
         initIngreMenu();
-
     };
     request.send(null);
     initIngreBar();
@@ -76,8 +75,8 @@ function searches() {
         $('#dialog').show().effect("shake").dialog({
             dialogClass: "alert"
         });
-        $('#dialog').hide()
-        return
+        $('#dialog').hide();
+        return;
     }
     let params = [];
     $.each(ingres, i => {
@@ -112,8 +111,6 @@ function loadRecipes() {
                     .click(display_recipe)
                     .append(img);
                 findOrCreateDivWithClass("All", "recipeContainer").append(div);
-                if (recipe.dietary.indexOf("vegetarian") >= 0)
-                    findOrCreateDivWithClass("Vegetarian", "recipeContainer").append(div.clone());
             })
         })
             .effect("slide");
