@@ -1,27 +1,24 @@
 function display_recipe() {
-    let recipe = recipes.filter(recipe => recipe.recipe_name === $(this).attr('id'));
-    if (recipe) {
-        get_and_load_recipe(recipe[0]['_id']);
-    }
+    //recipe id should be the div id
+    let id = $(this).attr('id');
+    fetch_and_load_recipe(id);
 }
 
-function get_and_load_recipe(recipe_id) {
+function fetch_and_load_recipe(recipe_id) {
     let request = new XMLHttpRequest();
     request.open("GET", `/recipes/${recipe_id}`);
-    request.onreadystatechange = function () {
-        if (request.readyState == 4 && request.status == 200) {
-            let recipe = JSON.parse(this.responseText);
-            load_recipe(recipe);
-        }
-    };
+    request.onreadystatechange = load_recipe;
     request.send(null);
 }
 
-function load_recipe(recipe){
-    init_img(recipe);
-    init_ingredients(recipe);
-    init_instruction(recipe);
-    $('#recipeDisplay').show();
+function load_recipe() {
+    if (this.readyState == 4 && this.status == 200) {
+        let recipe = JSON.parse(this.responseText);
+        init_img(recipe);
+        init_ingredients(recipe);
+        init_instruction(recipe);
+        $('#recipeDisplay').show();
+    }
 }
 
 /**

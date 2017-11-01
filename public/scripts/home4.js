@@ -27,13 +27,12 @@ function initIngredients() {
 function initIngreMenu() {
     for (let catId in ingredients) {
         let category = ingredients[catId];
-        $("<h3></h3>").html(catId).appendTo("#ingreMenu");
-        let div = $("<div></div>").appendTo("#ingreMenu");
-        div = $("<div></div>").css("display", "flex").attr("id", catId).addClass("ingreBar rounded-div").appendTo(div);
-        for (let i in category) {
-            let ingre = category[i];
-            $("<div></div>").attr("id", `${catId}--${ingre.name}`)
-                .html(ingre.name)
+        $("<h3>").html(catId).appendTo("#ingreMenu");
+        let div = $("<div>").appendTo("#ingreMenu");
+        div = $("<div>").css("display", "flex").attr("id", catId).addClass("ingreBar rounded-div").appendTo(div);
+        category.forEach(ingr => {
+            $("<div>").attr("id", `${catId}--${ingr.name}`)
+                .html(ingr.name)
                 .addClass("ingreBut")
                 .appendTo(`#${catId}`)
                 .addClass("rounded-div")
@@ -41,7 +40,7 @@ function initIngreMenu() {
                     scope: "ingre",
                     helper: "clone"
                 });
-        }
+        })
     }
     setTimeout(() => $("#ingreMenu").accordion(), 1);
 }
@@ -96,7 +95,7 @@ function searches() {
  */
 function loadRecipes() {
     if (this.readyState == 4 && this.status == 200) {
-        recipes = JSON.parse(this.responseText);
+        let recipes = JSON.parse(this.responseText);
         //reload
         $("#searchResult").load("recipes/search_result.html", () => {
             //enable tab widget
@@ -104,24 +103,25 @@ function loadRecipes() {
             // update message
             $("#notification").html(`${recipes.length} recipes have been found.`);
             // create recipe shortcut
-            for (let i = 0; i < recipes.length; i++) {
-                let recipe = recipes[i];
+            recipes.forEach(recipe => {
                 let img = $("<img>").attr("src", recipe.image.source);
-                let div = $("<div></div>").attr("id", recipe.recipe_name)
+                // store recipe._id as div id, and name as data-name
+                let div = $("<div>").attr("id", recipe._id)
+                    .attr("data-name", recipe.recipe_name)
                     .addClass("recipe-button")
                     .click(display_recipe)
                     .append(img);
                 findOrCreateDivWithClass("All", "recipeContainer").append(div);
                 if (recipe.dietary.indexOf("vegetarian") >= 0)
                     findOrCreateDivWithClass("Vegetarian", "recipeContainer").append(div.clone());
-            }
+            })
         })
             .effect("slide");
     }
 }
 
 /**
- *
+ * look for div with the class of className in div by parentId, if not, create a new one
  * @param parentId
  * @param className
  * @returns {*}
@@ -129,6 +129,6 @@ function loadRecipes() {
 function findOrCreateDivWithClass(parentId, className) {
     let container = $(`#${parentId}`).find(`.${className}`);
     if (!container.length)
-        container = $("<div></div>").addClass(className).appendTo(`#${parentId}`);
+        container = $("<div>").addClass(className).appendTo(`#${parentId}`);
     return container;
 }
