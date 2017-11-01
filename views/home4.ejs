@@ -9,13 +9,14 @@
     <link rel="stylesheet" href="/jquery-ui/jquery-ui.min.css">
     <script src="/jquery-ui/jquery-ui.min.js" type="text/javascript"></script>
     <script src="/scripts/home4.js" type="text/javascript"></script>
+    <script src="/scripts/recipe4.js" type="text/javascript"></script>
 </head>
 
 <body ng-app="home" ng-controller="home">
     <div id="page">
         <div id="menu">
-            <button id="add_recipe" onclick="document.location.href='/recipes/add_recipe'">suggest</button>
-            <button id="login" onclick="document.location.href='/auth/login'">login</button>
+            <button id="add_recipe" onclick="document.location.href='/recipes/add_recipe'" class="ui-state-default">suggest</button>
+            <button id="login" onclick="document.location.href='/auth/login'" class="ui-state-default">login</button>
             <!--<button id="login" onclick="document.location.href='/auth/logout'">logout</button>-->
         </div>
         <!-- logo includes welcome message and a home picture -->
@@ -31,15 +32,43 @@
         </div>
         <div id="dialog" title="Alert">Minimum 2 ingredients are required</div>
         <!--ingredient menu to show all available ingredients from the system-->
-        <div id="ingreMenu">
-        </div>
+        <div id="ingreMenu"></div>
         <!--search button-->
-        <input type="button" value="Search Recipe" id="searchButton3" onclick=searches3()>
+        <input type="button" value="Search Recipe" class="ui-state-default" id="searchButton" onclick=searches()>
         <!--search Result to show recipes after search-->
         <div id="searchResult"></div>
 
-    </div>
+        <div id="recipeDisplay" class="rounded-div" style="display: none">
+            <h2 id='recipe_name'></h2>
+            <center><img id='recipe_img'></center>
 
+            <!-- recipeContent includes a table of ingredients and direction -->
+            <div id='recipeContent'>
+
+                <div id='ingredients' class="div-center">
+                    <p><b>Ingredients</b></p>
+                    <table id='ingredient_table' border="1">
+                        <thead>
+                            <tr>
+                                <th>Ingrdient</th>
+                                <th>Quantity</th>
+                                <th>Note</th>
+                            </tr>
+                        </thead>
+                        <tbody id="ingr_body"></tbody>
+                    </table>
+                </div>
+
+                <div id='instruction'>
+                    <p><b>Instruction</b></p>
+                    <p>
+                        <ol id="steps"></ol>
+                    </p>
+                </div>
+
+            </div>
+        </div>
+    </div>
 </body>
 
 </html>

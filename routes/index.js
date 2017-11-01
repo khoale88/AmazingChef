@@ -13,12 +13,6 @@ index.get('/search', (req, res) => {
     let db = req.db;
     // process form data
     searching(db, ingredients)
-        .then(recipes => {
-            recipes.forEach(recipe => {
-                recipe.href = `/recipes/${recipe.recipe_name}.html`;
-            });
-            return recipes;
-        })
         .then(recipes => res.send(recipes));
 });
 
@@ -37,7 +31,7 @@ index.get("/ingredients", (req, res) => {
  */
 function searching(db, ingredients) {
     let collection = db.get('recipes');
-    return collection.find({'ingredients':{$elemMatch:{name:{$in:ingredients}}}},{})
+    return collection.find({'ingredients':{$elemMatch:{name:{$in:ingredients}}}},{ingredients:0, instruction:0})
         .then(docs => {
             let recipes = docs;
             db.close();

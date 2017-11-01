@@ -4,17 +4,18 @@ let ingredients; //ingredients = [egg, potato]
 
 $(init);
 
-function init() {        
-    $('#dialog').hide() 
+function init() {
+    $(':header').addClass('ui-widget-header').addClass('ui-corner-all');
+    $('#dialog').hide()
     initIngredients();
 
 }
 
-function initIngredients(){
+function initIngredients() {
     let request = new XMLHttpRequest();
     request.open("GET", "/ingredients");
     request.onreadystatechange = function () {
-        if(request.readyState==4 && request.status == 200)
+        if (request.readyState == 4 && request.status == 200)
             ingredients = JSON.parse(request.responseText);
         initIngreMenu();
 
@@ -23,13 +24,13 @@ function initIngredients(){
     initIngreBar();
 }
 
-function initIngreMenu(){
-    for(let catId in ingredients){
+function initIngreMenu() {
+    for (let catId in ingredients) {
         let category = ingredients[catId];
         $("<h3></h3>").html(catId).appendTo("#ingreMenu");
         let div = $("<div></div>").appendTo("#ingreMenu");
-        div = $("<div></div>").css("display","flex").attr("id",catId).addClass("ingreBar rounded-div").appendTo(div);
-        for(let i in category) {
+        div = $("<div></div>").css("display", "flex").attr("id", catId).addClass("ingreBar rounded-div").appendTo(div);
+        for (let i in category) {
             let ingre = category[i];
             $("<div></div>").attr("id", `${catId}--${ingre.name}`)
                 .html(ingre.name)
@@ -45,16 +46,17 @@ function initIngreMenu(){
     setTimeout(() => $("#ingreMenu").accordion(), 1);
 }
 
-function initIngreBar(){
-    $("#ingreBar").resizable({
+function initIngreBar() {
+    $("#ingreBar")
+        .resizable({
             containment: "parent",
             minWidth: 270
-            })        
-            .droppable({
+        })
+        .droppable({
             activeClass: "ui-state-highlight",
             scope: "ingre",
             over: function (event, ui) {
-                if(!$(this).find("#" + ui.draggable.attr("id")).length)
+                if (!$(this).find("#" + ui.draggable.attr("id")).length)
                     ui.draggable.appendTo(this);
             },
             out: function (event, ui) {
@@ -62,21 +64,26 @@ function initIngreBar(){
                 catId = catId.slice(0, catId.indexOf("--"));
                 ui.draggable.appendTo(`#${catId}`);
             }
-    });
+        })
+        .addClass('ui-widget')
+        .addClass('ui-widget-content')
+        .addClass('ui-corner-all');
 }
 
-function searches3(){
+function searches() {
     let ingres = $("#ingreBar").find(".ingreBut");
-    if(ingres.length < INGR_MIN_CNT){
+    if (ingres.length < INGR_MIN_CNT) {
         //alert(`minimum ${INGR_MIN_CNT} ingredients are required`);
-        $('#dialog').show().effect( "shake" ).dialog({
-          dialogClass:  "alert"
+        $('#dialog').show().effect("shake").dialog({
+            dialogClass: "alert"
         });
         $('#dialog').hide()
         return
     }
     let params = [];
-    $.each(ingres, i => {params.push($(ingres[i]).html())});
+    $.each(ingres, i => {
+        params.push($(ingres[i]).html())
+    });
     let request = new XMLHttpRequest();
     request.open("GET", `/search?ingredients=${JSON.stringify(params)}`);
     request.onreadystatechange = loadRecipes;
@@ -89,7 +96,7 @@ function searches3(){
  */
 function loadRecipes() {
     if (this.readyState == 4 && this.status == 200) {
-        let recipes = JSON.parse(this.responseText);
+        recipes = JSON.parse(this.responseText);
         //reload
         $("#searchResult").load("recipes/search_result.html", () => {
             //enable tab widget
@@ -100,18 +107,16 @@ function loadRecipes() {
             for (let i = 0; i < recipes.length; i++) {
                 let recipe = recipes[i];
                 let img = $("<img>").attr("src", recipe.image.source);
-                // AJAX tabs
-                img = $("<a></a>").attr("href", recipe.href)
-                    .append(img);
                 let div = $("<div></div>").attr("id", recipe.recipe_name)
                     .addClass("recipe-button")
+                    .click(display_recipe)
                     .append(img);
                 findOrCreateDivWithClass("All", "recipeContainer").append(div);
                 if (recipe.dietary.indexOf("vegetarian") >= 0)
                     findOrCreateDivWithClass("Vegetarian", "recipeContainer").append(div.clone());
             }
         })
-        .effect("slide");
+            .effect("slide");
     }
 }
 
@@ -121,7 +126,7 @@ function loadRecipes() {
  * @param className
  * @returns {*}
  */
-function findOrCreateDivWithClass(parentId, className){
+function findOrCreateDivWithClass(parentId, className) {
     let container = $(`#${parentId}`).find(`.${className}`);
     if (!container.length)
         container = $("<div></div>").addClass(className).appendTo(`#${parentId}`);

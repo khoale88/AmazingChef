@@ -1,5 +1,15 @@
+/**
+ * created by Khoa on 10/28/2017
+ * router for recipes-related api
+ */
 let recipes = require('express').Router();
 
+/**
+ * helper fuction to determined if admin is login
+ * @param req
+ * @param res
+ * @param next
+ */
 function isAdmin(req, res, next) {
     let now = new Date().getTime() / 1000;
     // session valid for 10 mins only
@@ -10,10 +20,16 @@ function isAdmin(req, res, next) {
     }
 };
 
+/**
+ * get form for adding a recipe, admin login required
+ */
 recipes.get('/add_recipe', isAdmin, (req, res) => {
     res.render('add_recipe', {})
 });
 
+/**
+ * handle recipe adding request
+ */
 recipes.post('/', isAdmin, (req, res) => {
     let recipe = req.body;
     console.log(recipe);
@@ -27,6 +43,9 @@ recipes.post('/', isAdmin, (req, res) => {
 
 });
 
+/**
+ * read a recipe given the recipe id
+ */
 recipes.get('/:id', (req, res) =>{
     let collection = req.db.get('recipes');
     collection.findOne({_id:req.params.id})
@@ -34,6 +53,9 @@ recipes.get('/:id', (req, res) =>{
         .catch(err => console.log(err));
 });
 
+/**
+ * delete a recipe given hte recipe id
+ */
 recipes.delete('/:id', (req, res) => {
     let collection = req.db.get('recipes');
     collection.remove({_id:req.params.id})
@@ -41,6 +63,9 @@ recipes.delete('/:id', (req, res) => {
         .catch(err => console.log(err));
 });
 
+/**
+ * modify a recipe given the recipe id
+ */
 recipes.put('/:id', (req, res) =>{
     let collection = req.db.get('recipes');
     let recipe = req.body;
