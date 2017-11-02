@@ -8,7 +8,7 @@ let inst_counter = 0;
 $(document).ready(init);
 
 function init() {
-    if (is_editing()) {
+    if (isEditing()) {
         initRecipe(recipe);
     } else {
         // create addIngredient buttons
@@ -21,7 +21,7 @@ function init() {
     }
 }
 
-function is_editing(){
+function isEditing(){
     return !$.isEmptyObject(recipe)
 }
 
@@ -146,7 +146,7 @@ function submitRecipe() {
 
     let method = "POST";
     let uri = "/recipes";
-    if (is_editing()) {
+    if (isEditing()) {
         method = "PUT";
         uri += `/${recipe._id}`;
     }

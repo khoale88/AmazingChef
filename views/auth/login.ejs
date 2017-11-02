@@ -13,7 +13,7 @@
           return;
         };
         function login(){
-            let formData = $("#login-form").serializeArray();
+            let formData = $("#login_form").serializeArray();
             let data = {};
             $(formData).each((index, item) => {
                 data[item.name] = item.value;
@@ -38,7 +38,7 @@
     <div id="page">
         <!-- logo includes welcome message and a home picture -->
         <div id="login">
-            <form id="login-form" action="" method="">
+            <form id="login_form" action="" method="">
                 <input id="username" type="text" name="username" placeholder="username">
                 <input id="password" type="text" name="password" placeholder="password">
                 <input type="button" value="submit" onclick="login()">

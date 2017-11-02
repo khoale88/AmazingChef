@@ -4,30 +4,30 @@
 function display_recipe() {
     //recipe id should be the div id
     let id = $(this).attr('id');
-    fetch_and_load_recipe(id);
+    fetchLoadRecipe(id);
 }
 
 /**
  * fetch recipe data given recipe_id
  * @param recipe_id
  */
-function fetch_and_load_recipe(recipe_id) {
+function fetchLoadRecipe(recipe_id) {
     let request = new XMLHttpRequest();
     request.open("GET", `/recipes/${recipe_id}`);
-    request.onreadystatechange = load_recipe;
+    request.onreadystatechange = loadRecipe;
     request.send(null);
 }
 
 /**
  * load recipe when response is ready
  */
-function load_recipe() {
+function loadRecipe() {
     if (this.readyState == 4 && this.status == 200) {
         let recipe = JSON.parse(this.responseText);
         $("#recipeDisplay").attr('data-r-id', recipe._id);
-        init_img(recipe);
-        init_ingredients(recipe);
-        init_instruction(recipe);
+        loadImg(recipe);
+        loadIngredients(recipe);
+        loadInstruction(recipe);
         $('#recipeDisplay').show();
     }
 }
@@ -36,7 +36,7 @@ function load_recipe() {
  * setup recipe name and image
  * @param {*} recipe recipe data
  */
-function init_img(recipe) {
+function loadImg(recipe) {
     $('#recipe_name')
         .html(recipe['recipe_name'].replace("_", " "));
 
@@ -50,7 +50,7 @@ function init_img(recipe) {
  * and then add ingredients from new recipe
  * @param {*} recipe recipe data
  */
-function init_ingredients(recipe) {
+function loadIngredients(recipe) {
     $('#ingr_body').empty();
     recipe['ingredients'].forEach(ingr => {
         let tr = $('<tr>').appendTo('#ingr_body');
@@ -65,7 +65,7 @@ function init_ingredients(recipe) {
  * function will first remove steps from old recipe, and replace them by new recipe's data
  * @param {*} recipe recipe data
  */
-function init_instruction(recipe) {
+function loadInstruction(recipe) {
     //remove old recipe's steps
     $("#steps").empty();
     recipe['instruction'].forEach(instruction => {
@@ -76,7 +76,7 @@ function init_instruction(recipe) {
 /**
  * delete recipe button action
  */
-function del_recipe(){
+function delRecipe(){
     let recipe_id = $("#recipeDisplay").attr('data-r-id');
     let request = new XMLHttpRequest();
     request.open("DELETE", `/recipes/${recipe_id}`);
@@ -95,7 +95,7 @@ function del_recipe(){
 /**
  * edit recipe button action
  */
-function edit_recipe(){
+function editRecipe(){
     let recipe_id = $("#recipeDisplay").attr('data-r-id');
     document.location.href = `/recipes/edit_recipe/${recipe_id}`;
 }

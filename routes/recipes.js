@@ -12,19 +12,19 @@ let recipes = require('express').Router();
  */
 function isAdmin(req, res, next) {
     let now = new Date().getTime() / 1000;
-    // session valid for 10 mins only
-    if (req.session.admin && now - req.session.logTime <= 600) {
+    // session valid for 60 mins only
+    if (req.session.admin && now - req.session.logTime <= 3600) {
         next();
     } else {
         res.redirect('/auth/login');
     }
-};
+}
 
 /**
  * get form for adding a recipe, admin login required
  */
 recipes.get('/add_recipe', isAdmin, (req, res) => {
-    res.render('add_recipe4', {recipe:{}})
+    res.render('addEditRecipe4', {recipe:{}})
 });
 
 /**
@@ -40,7 +40,6 @@ recipes.post('/', isAdmin, (req, res) => {
             res.status(201).send({success: true, recipe: doc})
         })
         .then(() => db.close);
-
 });
 
 /**
@@ -80,7 +79,7 @@ recipes.put('/:id', isAdmin, (req, res) =>{
 recipes.get('/edit_recipe/:id', isAdmin, (req, res) =>{
     let collection = req.db.get('recipes');
     collection.findOne({_id:req.params.id})
-        .then(doc => res.render('add_recipe4', {recipe:doc}))
+        .then(doc => res.render('addEditRecipe4', {recipe:doc}))
         .catch(err => console.log(err));
 });
 
