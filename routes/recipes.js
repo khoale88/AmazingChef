@@ -24,13 +24,13 @@ function isAdmin(req, res, next) {
  * get form for adding a recipe, admin login required
  */
 recipes.get('/add_recipe', isAdmin, (req, res) => {
-    res.render('add_recipe4', {})
+    res.render('add_recipe4', {recipe:{}})
 });
 
 /**
  * handle recipe adding request
  */
-recipes.post('/', isAdmin, (req, res) => {
+recipes.post('/add_recipe', isAdmin, (req, res) => {
     let recipe = req.body;
     console.log(recipe);
     let db = req.db;
@@ -71,6 +71,16 @@ recipes.put('/:id', (req, res) =>{
     let recipe = req.body;
     collection.update({_id:req.params.id}, {$set:recipe})
         .then(doc => res.send(doc))
+        .catch(err => console.log(err));
+});
+
+/**
+ * get modification form given the recipe id
+ */
+recipes.get('/edit_recipe/:id', (req, res) =>{
+    let collection = req.db.get('recipes');
+    collection.findOne({_id:req.params.id})
+        .then(doc => res.render('add_recipe4', {recipe:doc}))
         .catch(err => console.log(err));
 });
 

@@ -1,24 +1,39 @@
 // ingredient count minimum
-const INGR_MIN_CNT = 1;
-const INST_MIN_CNT = 1;
+const INGR_MIN_CNT = 0;
+const INST_MIN_CNT = 0;
 
 let ingre_counter = 0;
 let inst_counter = 0;
 
-// html validation pattern for ingredient input
-const ingre_validation = "^[a-zA-Z][a-zA-Z\s]+$";
-
 $(document).ready(init);
 
 function init() {
+    if(!$.isEmptyObject(recipe)){
+        initAll(recipe);
+    }
     // create addIngredient buttons 
-    for (let i = 0; i < INGR_MIN_CNT; i++) {
-        $('#add-ingr').click();
-    }
-    for (let i = 0; i < INST_MIN_CNT; i++) {
-        $('#add-inst').click();
-    }
-};
+    // for (let i = 0; i < INGR_MIN_CNT; i++) {
+    //     $('#add-ingr').click();
+    // }
+    // for (let i = 0; i < INST_MIN_CNT; i++) {
+    //     $('#add-inst').click();
+    // }
+    // let recipe = "<%- JSON.stringify(recipe) %>";
+    // console.log(recipe);
+}
+
+function initAll(recipe){
+    $("#recipe_name input").val(recipe.recipe_name);
+    $("#image_url input").val(recipe.image.source);
+    $("#cruisine_type input").val(recipe.cruisine_type.join(','));
+    $("#meal_type input").val(recipe.meal_type.join(','));
+    $("#dietary input").val(recipe.dietary.join(','));
+    $("#cook_time input").val(recipe.cook_time);
+
+    recipe.ingredients.each(ingr => {
+
+    })
+}
 
 /**
  * create one new ingredient input box
