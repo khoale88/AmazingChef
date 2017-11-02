@@ -30,7 +30,7 @@ recipes.get('/add_recipe', isAdmin, (req, res) => {
 /**
  * handle recipe adding request
  */
-recipes.post('/add_recipe', isAdmin, (req, res) => {
+recipes.post('/', isAdmin, (req, res) => {
     let recipe = req.body;
     console.log(recipe);
     let db = req.db;
