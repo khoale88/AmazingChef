@@ -39,6 +39,11 @@
         <div id="searchResult"></div>
 
         <div id="recipeDisplay" class="rounded-div" style="display: none">
+            <div style="display:flex">
+                <button id="edit_recipe" onclick="edit_recipe()" class="ui-state-default">edit</button>
+                <button id="del_recipe" onclick="del_recipe()" class="ui-state-default">del</button>
+                <!--<button id="login" onclick="document.location.href='/auth/logout'">logout</button>-->
+            </div>
             <h2 id='recipe_name'></h2>
             <center><img id='recipe_img'></center>
 

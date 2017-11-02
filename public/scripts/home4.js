@@ -6,7 +6,7 @@ $(init);
 
 function init() {
     $(':header').addClass('ui-widget-header').addClass('ui-corner-all');
-    $('#dialog').hide()
+    $('#dialog').hide();
     initIngredients();
 
 }
@@ -69,6 +69,7 @@ function initIngreBar() {
 }
 
 function searches() {
+    $('#recipeDisplay').hide();
     let ingres = $("#ingreBar").find(".ingreBut");
     if (ingres.length < INGR_MIN_CNT) {
         //alert(`minimum ${INGR_MIN_CNT} ingredients are required`);

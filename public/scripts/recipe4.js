@@ -14,6 +14,7 @@ function fetch_and_load_recipe(recipe_id) {
 function load_recipe() {
     if (this.readyState == 4 && this.status == 200) {
         let recipe = JSON.parse(this.responseText);
+        $("#recipeDisplay").attr('data-r-id', recipe._id);
         init_img(recipe);
         init_ingredients(recipe);
         init_instruction(recipe);
@@ -60,4 +61,15 @@ function init_instruction(recipe) {
     recipe['instruction'].forEach(instruction => {
         $('<li>').appendTo("#steps").html(instruction);
     });
+}
+
+function del_recipe(){
+    let recipe_id = $("#recipeDisplay").attr('data-r-id');
+    let request = new XMLHttpRequest();
+    request.open("DELETE", `/recipes/${recipe_id}`);
+    request.onreadystatechange = () => {
+        if (request.readyState == 4 && request.status == 204)
+            $('#searchButton').click()
+    };
+    request.send(null);
 }

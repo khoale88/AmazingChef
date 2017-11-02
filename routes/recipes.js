@@ -24,7 +24,7 @@ function isAdmin(req, res, next) {
  * get form for adding a recipe, admin login required
  */
 recipes.get('/add_recipe', isAdmin, (req, res) => {
-    res.render('add_recipe', {})
+    res.render('add_recipe4', {})
 });
 
 /**
