@@ -56,7 +56,7 @@ recipes.get('/:id', (req, res) =>{
 /**
  * delete a recipe given hte recipe id
  */
-recipes.delete('/:id', (req, res) => {
+recipes.delete('/:id', isAdmin, (req, res) => {
     let collection = req.db.get('recipes');
     collection.remove({_id:req.params.id})
         .then(doc => res.status(204).send(null))
@@ -66,18 +66,18 @@ recipes.delete('/:id', (req, res) => {
 /**
  * modify a recipe given the recipe id
  */
-recipes.put('/:id', (req, res) =>{
+recipes.put('/:id', isAdmin, (req, res) =>{
     let collection = req.db.get('recipes');
     let recipe = req.body;
     collection.update({_id:req.params.id}, {$set:recipe})
-        .then(doc => res.send(doc))
+        .then(doc => res.status(200).send(doc))
         .catch(err => console.log(err));
 });
 
 /**
  * get modification form given the recipe id
  */
-recipes.get('/edit_recipe/:id', (req, res) =>{
+recipes.get('/edit_recipe/:id', isAdmin, (req, res) =>{
     let collection = req.db.get('recipes');
     collection.findOne({_id:req.params.id})
         .then(doc => res.render('add_recipe4', {recipe:doc}))

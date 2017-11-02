@@ -1,6 +1,6 @@
 // ingredient count minimum
-const INGR_MIN_CNT = 0;
-const INST_MIN_CNT = 0;
+const INGR_MIN_CNT = 1;
+const INST_MIN_CNT = 1;
 
 let ingre_counter = 0;
 let inst_counter = 0;
@@ -8,21 +8,24 @@ let inst_counter = 0;
 $(document).ready(init);
 
 function init() {
-    if(!$.isEmptyObject(recipe)){
-        initAll(recipe);
+    if (is_editing()) {
+        initRecipe(recipe);
+    } else {
+        // create addIngredient buttons
+        for (let i = 0; i < INGR_MIN_CNT; i++) {
+            $('#add-ingr').click();
+        }
+        for (let i = 0; i < INST_MIN_CNT; i++) {
+            $('#add-inst').click();
+        }
     }
-    // create addIngredient buttons 
-    // for (let i = 0; i < INGR_MIN_CNT; i++) {
-    //     $('#add-ingr').click();
-    // }
-    // for (let i = 0; i < INST_MIN_CNT; i++) {
-    //     $('#add-inst').click();
-    // }
-    // let recipe = "<%- JSON.stringify(recipe) %>";
-    // console.log(recipe);
 }
 
-function initAll(recipe){
+function is_editing(){
+    return !$.isEmptyObject(recipe)
+}
+
+function initRecipe(recipe) {
     $("#recipe_name input").val(recipe.recipe_name);
     $("#image_url input").val(recipe.image.source);
     $("#cruisine_type input").val(recipe.cruisine_type.join(','));
@@ -30,8 +33,19 @@ function initAll(recipe){
     $("#dietary input").val(recipe.dietary.join(','));
     $("#cook_time input").val(recipe.cook_time);
 
-    recipe.ingredients.each(ingr => {
+    recipe.ingredients.forEach(ingr => {
+        let count_label = ('0' + (ingre_counter + 1)).slice(-2);
+        $("#add-ingr").click();
+        $(`#ingr-${count_label}`).val(ingr.name);
+        $(`#quantity-${count_label}`).val(ingr.quantity);
+        $(`#metric-${count_label}`).val(ingr.metric);
+        $(`#note-${count_label}`).val(ingr.note);
+    });
 
+    recipe.instruction.forEach(inst => {
+        let count_label = ('0' + (inst_counter + 1)).slice(-2);
+        $("#add-inst").click();
+        $(`#inst-${count_label}`).val(inst);
     })
 }
 
@@ -71,7 +85,7 @@ function addIngredient() {
         .attr("placeholder", "note")
         .addClass('ingr-note')
         .appendTo(div);
-    if(ingre_counter >= INGR_MIN_CNT) {
+    if (ingre_counter >= INGR_MIN_CNT) {
         $('<button></button>')
             .click("ingreTBDiv" + count_label, removeIngredient)
             .appendTo(div)
@@ -79,18 +93,18 @@ function addIngredient() {
     }
     div.appendTo("#ingr-group");
     ingre_counter++;
-};
+}
 
-function removeDiv(divId){
+function removeDiv(divId) {
     $('#' + divId).remove();
-};
+}
 
 /**
  * remove the last ingredient input box
  */
 function removeIngredient(event) {
     removeDiv(event.data);
-};
+}
 
 function addInstruction() {
     let count_label = ('0' + (inst_counter + 1)).slice(-2);
@@ -104,7 +118,7 @@ function addInstruction() {
         .attr("required", "")
         .addClass("inst")
         .appendTo(div);
-    if(inst_counter >= INST_MIN_CNT) {
+    if (inst_counter >= INST_MIN_CNT) {
         $('<button></button>')
             .click("instTBDiv" + count_label, removeInstruction)
             .appendTo(div)
@@ -112,37 +126,47 @@ function addInstruction() {
     }
     div.appendTo("#inst-group");
     inst_counter++;
-};
+}
 
 /**
  * remove the last ingredient input box
  */
 function removeInstruction(event) {
     removeDiv(event.data);
-};
+}
 
-function submitRecipe(){
+function submitRecipe() {
     data = {};
     data.ingredients = getIngr();
     data.instruction = getInst();
     d = getInfo();
-    for (let k in d){
+    for (let k in d) {
         data[k] = d[k];
     }
+
+    let method = "POST";
+    let uri = "/recipes";
+    if (is_editing()) {
+        method = "PUT";
+        uri += `/${recipe._id}`;
+    }
+
     let request = new XMLHttpRequest();
-    request.open("POST", "/recipes", true);
+    request.open(method, uri, true);
     request.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
     request.onreadystatechange = function () {
-        if(request.readyState==4 && request.status == 201) {
-            console.log(JSON.parse(request.responseText));
-            $('#form-reset').click();
+        if (request.readyState === 4){
+            if(request.status === 201)
+                $('#form-reset').click();
+            else if (request.status === 200)
+                document.location.href = "/";
         }
     };
     request.send(JSON.stringify(data));
-};
+}
 
-function getIngr(){
-    let keys = ['name', 'quantity', 'unit', 'note'];
+function getIngr() {
+    let keys = ['name', 'quantity', 'metric', 'note'];
     let ingr = [];
     $('.ingre').each((index, item) => {
         let b = {};
@@ -152,18 +176,18 @@ function getIngr(){
         ingr.push(b);
     });
     return ingr;
-};
+}
 
-function getInst(){
+function getInst() {
     let inst = [];
     $('.inst').each((index, item) => {
         inst.push($(item).val());
     });
     return inst;
-};
+}
 
-function getInfo(){
-    let info={};
+function getInfo() {
+    let info = {};
     info.recipe_name = $('.recipe_name').val();
     info.cruisine_type = $('.cruisine_type').val().split(',');
     info.meal_type = $('.meal_type').val().split(',');
@@ -173,4 +197,4 @@ function getInfo(){
     info.dietary = $('.dietary').val().split(',');
     info.cook_time = $('.cook_time').val();
     return info;
-};
+}

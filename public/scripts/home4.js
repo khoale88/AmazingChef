@@ -1,6 +1,6 @@
 // ingredient count minimum
 const INGR_MIN_CNT = 2;
-let ingredients; //ingredients = [egg, potato]
+// let ingredients; //ingredients = [egg, potato]
 
 $(init);
 
@@ -11,19 +11,26 @@ function init() {
 
 }
 
+/**
+ * fetch ingredient from server
+ */
 function initIngredients() {
     let request = new XMLHttpRequest();
+    let ingredients = {};
     request.open("GET", "/ingredients");
     request.onreadystatechange = function () {
         if (request.readyState == 4 && request.status == 200)
             ingredients = JSON.parse(request.responseText);
-        initIngreMenu();
+        initIngreMenu(ingredients);
     };
     request.send(null);
     initIngreBar();
 }
 
-function initIngreMenu() {
+/**
+ * init ingredient menu will initialize menu to be droppable and create draggable ingredient buttons
+ */
+function initIngreMenu(ingredients) {
     for (let catId in ingredients) {
         let category = ingredients[catId];
         $("<h3>").html(catId).appendTo("#ingreMenu");
@@ -44,6 +51,9 @@ function initIngreMenu() {
     setTimeout(() => $("#ingreMenu").accordion(), 1);
 }
 
+/**
+ * init ingredient bar will allow draggable ingredient buttons to be dropped here
+ */
 function initIngreBar() {
     $("#ingreBar")
         .resizable({
@@ -68,6 +78,9 @@ function initIngreBar() {
         .addClass('ui-corner-all');
 }
 
+/**
+ * search button action
+ */
 function searches() {
     $('#recipeDisplay').hide();
     let ingres = $("#ingreBar").find(".ingreBut");

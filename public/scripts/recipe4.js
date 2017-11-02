@@ -1,9 +1,16 @@
+/**
+ * entry funtion to display a recipe
+ */
 function display_recipe() {
     //recipe id should be the div id
     let id = $(this).attr('id');
     fetch_and_load_recipe(id);
 }
 
+/**
+ * fetch recipe data given recipe_id
+ * @param recipe_id
+ */
 function fetch_and_load_recipe(recipe_id) {
     let request = new XMLHttpRequest();
     request.open("GET", `/recipes/${recipe_id}`);
@@ -11,6 +18,9 @@ function fetch_and_load_recipe(recipe_id) {
     request.send(null);
 }
 
+/**
+ * load recipe when response is ready
+ */
 function load_recipe() {
     if (this.readyState == 4 && this.status == 200) {
         let recipe = JSON.parse(this.responseText);
@@ -63,13 +73,29 @@ function init_instruction(recipe) {
     });
 }
 
+/**
+ * delete recipe button action
+ */
 function del_recipe(){
     let recipe_id = $("#recipeDisplay").attr('data-r-id');
     let request = new XMLHttpRequest();
     request.open("DELETE", `/recipes/${recipe_id}`);
     request.onreadystatechange = () => {
-        if (request.readyState == 4 && request.status == 204)
-            $('#searchButton').click()
+        if (request.readyState == 4){
+            if(request.status == 204)
+                $('#searchButton').click();
+            else if (request.status === 404)
+                // console.log(request);
+                document.location.href = request.responseURL;
+        }
     };
     request.send(null);
+}
+
+/**
+ * edit recipe button action
+ */
+function edit_recipe(){
+    let recipe_id = $("#recipeDisplay").attr('data-r-id');
+    document.location.href = `/recipes/edit_recipe/${recipe_id}`;
 }
