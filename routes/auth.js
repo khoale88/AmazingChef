@@ -27,4 +27,14 @@ auth.post('/login', (req, res) => {
     }
 });
 
+// module.exports.isAmin = (req, res, next) => {
+//     let now = new Date().getTime() / 1000;
+//     // session valid for 60 mins only
+//     if (req.session.admin && now - req.session.logTime <= 3600) {
+//         next();
+//     } else {
+//         res.redirect('/auth/login');
+//     }
+// };
+
 module.exports = auth;
