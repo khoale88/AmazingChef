@@ -56,12 +56,26 @@ auth.post('/register', function(req, res)
  */
 auth.post('/login', (req, res) => {
     let body = req.body;
-    if(body.username === 'admin' && body.password==='admin'){
+    // Create an array of users with matching usernames.
+     var matches = registeredUsers.filter(function(user)
+                      {
+                          return user.username === req.body.username && user.password === body.password;
+                      });
+    if (matches.length > 0)
+        {
+            req.session.admin = true;
+        req.session.login = true;
+        req.session.logTime = new Date().getTime() / 1000;
+        res.redirect('/');
+        }
+    else if (body.username === 'admin' && body.password==='admin')
+    {
         req.session.admin = true;
         req.session.login = true;
         req.session.logTime = new Date().getTime() / 1000;
         res.redirect('/');
-    } else {
+    }
+    else {
         res.sendStatus(401);
     }
 });
