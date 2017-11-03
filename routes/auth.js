@@ -12,6 +12,9 @@ auth.get('/login', (req, res) => {
     res.render('auth/login');
 });
 
+auth.get('/register', (req, res) => {
+    res.render('auth/register');
+});
 /**
  * Handle login info
  */

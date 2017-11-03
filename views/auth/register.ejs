@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+    <title>Amzing Chef</title>
+
+    <link rel="stylesheet" href="/styles/mystyles1.css">
+    <script>
+        $(init);
+        function init(){
+          return;
+        };
+    </script>
+</head>
+
+<body ng-app="home" ng-controller="home">
+    <div id="page">
+        <!-- logo includes welcome message and a home picture -->
+        <div id="register">
+            <form id="register_form" action="" method="">
+                <h3>Register</h3> 
+                <p>
+                    <input id="username" type="text" name="username" placeholder="username" required="required">
+                </p>
+                 <p>
+                    <input id="password" type="text" name="password" placeholder="password" required="required">
+                </p>
+                <p>
+                    <input id="confirm password" type="text" name="confirm password" placeholder="confirm password" required="required">
+                </p>
+                 <p>
+                    <input type="button" value="submit" onclick="login()">
+                 </p>
+                  <p>Already a member
+                     <button id="Gotologin" onclick="document.location.href='/auth/login'">Go to login</button>
+            </form>
+        </div>
+
+
+
+    </div>
+
+</body>
+
+</html>

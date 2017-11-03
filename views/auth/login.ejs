@@ -42,14 +42,21 @@
         <!-- logo includes welcome message and a home picture -->
         <div id="login">
             <form id="login_form" action="" method="">
-                <input id="username" type="text" name="username" placeholder="username">
-                <input id="password" type="text" name="password" placeholder="password">
-                <input type="button" value="submit" onclick="login()">
+                <h3>Log in</h3> 
+                <p>
+                    <input id="username" type="text" name="username" placeholder="username">
+                </p>
+                 <p>
+                    <input id="password" type="text" name="password" placeholder="password">
+                </p>
+                 <p>
+                    <input type="button" value="submit" onclick="login()">
+                 </p>
             </form>
+           <p>Not a member yet ?
+                     <button id="register" onclick="document.location.href='/auth/register'" >register</button>
+                </p>
         </div>
-
-
-
     </div>
 
 </body>
