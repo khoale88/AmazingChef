@@ -24,7 +24,10 @@
             request.onreadystatechange = function () {
                 if(request.readyState==4 && request.status == 200) {
                     if(request.responseURL)
+                    {
+                        alert('Login Successful!!');
                         window.location = request.responseURL;
+                    }
                 } else if (request.readyState==4 && request.status == 401){
                     alert('Wrong username and password! Please use this to login\n\n   username: admin\n   password: admin');
                 }
