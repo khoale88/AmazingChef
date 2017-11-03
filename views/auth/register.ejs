@@ -12,6 +12,28 @@
         function init(){
           return;
         };
+        function register(){
+            let formData = $("#register_form").serializeArray();
+            let data = {};
+            $(formData).each((index, item) => {
+                data[item.name] = item.value;
+            })
+            let request = new XMLHttpRequest();
+            request.open("POST", "/auth/register", true);
+            request.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+            request.onreadystatechange = function () {
+                if(request.readyState==4 && request.status == 200) {
+                    if(request.responseURL)
+                    {
+                        alert('New User Registered Successful!!');
+                        window.location = request.responseURL;
+                    }
+                } else if (request.readyState==4 && request.status == 401){
+                    alert('Invalid Details');
+                }
+            };
+            request.send(JSON.stringify(data));
+        }
     </script>
 </head>
 
@@ -19,27 +41,25 @@
     <div id="page">
         <!-- logo includes welcome message and a home picture -->
         <div id="register">
-            <form id="register_form" action="" method="">
+            <form id="register_form" action="/auth/register" method="POST">
                 <h3>Register</h3> 
                 <p>
                     <input id="username" type="text" name="username" placeholder="username" required="required">
                 </p>
                  <p>
-                    <input id="password" type="text" name="password" placeholder="password" required="required">
+                    <input id="password" type="password" name="password" placeholder="password" required="required">
                 </p>
                 <p>
-                    <input id="confirm password" type="text" name="confirm password" placeholder="confirm password" required="required">
+                    <input id="confirmpassword" type="password" name="confirmpassword" placeholder="confirm password" required="required">
                 </p>
                  <p>
-                    <input type="button" value="submit" onclick="login()">
+                    <input type="button" value="submit" onclick="register()">
                  </p>
-                  <p>Already a member
-                     <button id="Gotologin" onclick="document.location.href='/auth/login'">Go to login</button>
             </form>
+            <p>Already a member
+                     <button id="Gotologin" onclick="document.location.href='/auth/login'">Go to login</button>
+            </p>
         </div>
-
-
-
     </div>
 
 </body>

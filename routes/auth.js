@@ -4,7 +4,7 @@
  */
 let express = require('express');
 let auth = express.Router();
-
+var registeredUsers = [];
 /**
  * GET login form
  */
@@ -15,6 +15,42 @@ auth.get('/login', (req, res) => {
 auth.get('/register', (req, res) => {
     res.render('auth/register');
 });
+
+auth.post('/register', function(req, res)
+{
+    if(!req.body.username || !req.body.password || !req.body.confirmpassword )
+    {
+         res.sendStatus(401);
+    } 
+    else if(req.body.password !== req.body.confirmpassword )
+    {
+         res.sendStatus(401);
+    }
+    else 
+    {
+        // Create an array of users with matching usernames.
+        var matches = registeredUsers.filter(function(user)
+                      {
+                          return user.username === req.body.username;
+                      });
+    if (matches.length > 0)
+        {
+             res.sendStatus(401);
+        }
+        
+        // Register a new user.
+        else
+        {
+            var newUser = { username: req.body.username, 
+                            password: req.body.password };
+            registeredUsers.push(newUser);
+            console.log("New user:"); console.log(newUser);
+            console.log("Registered users:"); console.log(registeredUsers);
+            res.redirect('/');
+        }
+    }
+});
+
 /**
  * Handle login info
  */
