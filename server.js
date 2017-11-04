@@ -17,27 +17,26 @@ app.use(express.static('public'));
 const monk = require("monk");
 // main database name is AMZC
 const db = monk('localhost:27017/AMZC');
-//initialize dbs with at least one recipe (omlette)
+//initialize dbs with recipes from json
 db.then(() => {
+    let recipes = ['omlette', 'potato_curry'];
     console.log('Connected correctly to server');
     let collection = db.get('recipes');
-    collection.findOne({'recipe_name':'omlette'})
-        .then(doc => {
-            if(!doc){
-                let omlette = JSON.parse(fs.readFileSync('recipes/omlette.json'));
-                collection.insert(omlette)
-                    .then(()=> db.close());
-            }
-        });
-    collection.findOne({'recipe_name':'potato_curry'})
-        .then(doc => {
-            if(!doc){
-                let curry = JSON.parse(fs.readFileSync('recipes/potato_curry.json'));
-                collection.insert(curry)
-                    .then(()=> db.close());
-            }
-        });
+    recipes.forEach(recipeName => {
+        dbFindOrInsertRecipeFromFile(collection, recipeName);
+    })
 });
+
+function dbFindOrInsertRecipeFromFile(collection, recipeName) {
+    collection.findOne({'recipe_name': recipeName}, {'_id': 1})
+        .then(doc => {
+            if (!doc) {
+                let recipe = JSON.parse(fs.readFileSync(`recipes/${recipeName}.json`));
+                collection.insert(recipe).then(() => db.close());
+            }
+        });
+}
+
 // use mongodb middleware in all request
 app.use((req, res, next) => {
     req.db = db;
