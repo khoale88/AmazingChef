@@ -23,11 +23,11 @@ index.get("/ingredients", (req, res) => {
 
 /**
  * helper function to search recipes based on ingredients
- * {'ingredients':{$elemMatch:{name:{$in:ingredients}}}}
+ * {'ingredients':{$elemMatch:{name:{$in:ingredients}}}, {ingredients:0, instruction:0}}
  *
- * @param {*} ingredients list of ingredients
- * @return  array of recipes
- *
+ * @param db mongoDB
+ * @param ingredients list of ingredients
+ * @return  {Promise|Promise.<TResult>|*} Promise object with an array of recipes
  */
 function searching(db, ingredients) {
     let collection = db.get('recipes');
