@@ -55,4 +55,4 @@ app.use('/khoa/', require('./routes/khoa'));
 app.use('/recipes/', require('./routes/recipes'));
 
 // run server
-app.listen(3000);
+app.listen(3001);

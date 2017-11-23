@@ -9,6 +9,7 @@ index.get("/", (req, res) => res.render("home4"));
 // api to search recipes based on ingredients
 index.get('/search', (req, res) => {
     // getting form data (query in get request)
+    console.log(req.query.ingredients);
     let ingredients = JSON.parse(req.query.ingredients);
     let db = req.db;
     // process form data

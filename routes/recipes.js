@@ -11,13 +11,14 @@ let recipes = require('express').Router();
  * @param next
  */
 function isAdmin(req, res, next) {
-    let now = new Date().getTime() / 1000;
-    // session valid for 60 mins only
-    if (req.session.admin && now - req.session.logTime <= 3600) {
-        next();
-    } else {
-        res.redirect('/auth/login');
-    }
+    // let now = new Date().getTime() / 1000;
+    // // session valid for 60 mins only
+    // if (req.session.admin && now - req.session.logTime <= 3600) {
+    //     next();
+    // } else {
+    //     res.redirect('/auth/login');
+    // }
+    next();
 }
 
 /**
