@@ -60,7 +60,11 @@ function searchByIngredients(db, ingredients, excluded, skip, limit) {
  * @returns {Promise|Promise.<TResult>|*}
  */
 function searchByName(db, name, skip, limit) {
+    
     let collection = db.get('recipes');
+
+    //console.log("results " + collection.find({recipe_name : 'omlette'}));
+
     return collection.find({'recipe_name': {$regex: name}}, {skip: skip, limit: limit})
         .then(docs => {
             let recipes = docs;
