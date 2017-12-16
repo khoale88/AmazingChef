@@ -16,7 +16,7 @@ app.use(express.static('public'));
 //configure mongo db
 const monk = require("monk");
 // main database name is AMZC
-const db = monk('mongodb://information:information@ds127783.mlab.com:27783/amzc');
+const db = monk('mongodb://localhost:27017/amzc');
 //initialize dbs with recipes from json
 db.then(() => {
     let recipes = ['omlette', 'potato_curry'];
